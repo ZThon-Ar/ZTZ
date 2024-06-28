@@ -30,7 +30,7 @@ class Config(object):
     # get this value from http://www.timezoneconverter.com/cgi-bin/findzone.tzc
     TZ = os.environ.get("TZ", "Asia/Baghdad")
     # set this with required zed repo link
-    UPSTREAM_REPO = os.environ.get("UPSTREAM_REPO", "https://github.com/ZThon-Ar/ZTZ")
+    UPSTREAM_REPO = os.environ.get("UPSTREAM_REPO", "https://github.com/Zelzal-SC/ZTZ")
     # External plugins repo
     EXTERNAL_REPO = os.environ.get("EXTERNAL_REPO", None)
     VCMODE = os.environ.get("VCMODE", False)
