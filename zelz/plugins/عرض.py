@@ -1,10 +1,9 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.contacts import UnblockRequest as unblock
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from . import zedub
 
 from ..core.managers import edit_or_reply
+from . import zedub
 
 plugin_category = "البوت"
 

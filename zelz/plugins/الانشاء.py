@@ -47,7 +47,8 @@ async def _(event):
                 )
             )
             await edit_or_reply(
-                event, f"**⎉╎الكـروب `{group_name}` تم إنشـائه.. بنجـاح✓** \n**⎉╎الرابـط** {result.link}"
+                event,
+                f"**⎉╎الكـروب `{group_name}` تم إنشـائه.. بنجـاح✓** \n**⎉╎الرابـط** {result.link}",
             )
         except Exception as e:
             await edit_delete(event, f"**- خطـأ :**\n{str(e)}")

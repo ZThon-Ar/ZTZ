@@ -258,9 +258,11 @@ async def send(event):
         mime_type=mime_type,
         attributes=attributes,
         force_file=False,
-        thumb=await event.client.upload_file(thumb_image_path)
-        if thumb_image_path
-        else None,
+        thumb=(
+            await event.client.upload_file(thumb_image_path)
+            if thumb_image_path
+            else None
+        ),
     )
     await event.edit("hi", file=media)
 

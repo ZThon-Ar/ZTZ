@@ -1,22 +1,16 @@
 import asyncio
-import contextlib
-import shutil
 
 from telethon.errors.rpcerrorlist import ForbiddenError
 from telethon.tl import functions, types
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.utils import get_display_name
 
-from . import zedub
-
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers import media_type, unsavegif
-from ..helpers.utils import _zedutils, _format
+from ..helpers import media_type
+from ..helpers.utils import _zedutils
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from ..sql_helper.echo_sql import addecho, get_all_echos, get_echos, is_echo, remove_all_echos, remove_echo, remove_echos
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, BOTLOG_CHATID, zedub
 
 plugin_category = "الخدمات"
 SPAM = gvarstatus("Z_SPAM") or "(مؤقت|مكرر)"
@@ -154,7 +148,8 @@ async def spammer(event):
         counter = int(zed[0])
     except Exception:
         return await edit_delete(
-            event, "**- ارسـل الامـر بالشكـل الآتي**\n\n`.كرر` **+ عدد الثواني + الرسالة او بالـرد ع رسالة**\n**- مثـال : .كرر 12 السلام عليكم**"
+            event,
+            "**- ارسـل الامـر بالشكـل الآتي**\n\n`.كرر` **+ عدد الثواني + الرسالة او بالـرد ع رسالة**\n**- مثـال : .كرر 12 السلام عليكم**",
         )
     if counter > 50:
         sleeptimet = 0.5
@@ -189,7 +184,11 @@ async def stickerpack_spam(event):
             event, "**- جـارِ إحضـار تفاصيل حـزمة الملصقات .. يرجى الإنتظـار**"
         )
     except BaseException:
-        await edit_delete(event, "**- هذا الملصق ليس مرتبط بـ أي حـزمة .. لذا تعذر إيجـاد الحـزمة ؟!**", 5)
+        await edit_delete(
+            event,
+            "**- هذا الملصق ليس مرتبط بـ أي حـزمة .. لذا تعذر إيجـاد الحـزمة ؟!**",
+            5,
+        )
         return
     try:
         get_stickerset = await event.client(
@@ -312,7 +311,10 @@ async def spammer(event):
     try:
         sleeptimet = sleeptimem = int(input_str[0])
     except Exception:
-        return await edit_delete(event, "**- ارسـل الامـر بالشكـل الآتي**\n\n`.مؤقت` **+ عدد الثواني + عدد المرات + الرسالة**\n**- مثـال : .مؤقت 12 12 السلام عليكم**")
+        return await edit_delete(
+            event,
+            "**- ارسـل الامـر بالشكـل الآتي**\n\n`.مؤقت` **+ عدد الثواني + عدد المرات + الرسالة**\n**- مثـال : .مؤقت 12 12 السلام عليكم**",
+        )
     zed = input_str[1:]
     await event.delete()
     addgvar("spamwork", True)
@@ -377,7 +379,6 @@ async def spammer(event):
     await event.delete()
     delgvar("spamwork")
     await spam_function(event, reply, sleeptimem, sleeptimet, DelaySpam=False)
-
 
 
 # Copyright (C) 2022 Zed-Thon . All Rights Reserved

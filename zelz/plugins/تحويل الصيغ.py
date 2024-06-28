@@ -1,31 +1,26 @@
 """
 ©ZelZal™
 """
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
-#الملـف حقـوق وتعديـل زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
+
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# الملـف حقـوق وتعديـل زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
 
 import asyncio
-import os
 import io
-import random
-import logging
+import os
 import time
 from datetime import datetime
 from io import BytesIO
 from shutil import copyfile
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
+
 from PIL import Image, ImageDraw, ImageFilter, ImageOps
 from pymediainfo import MediaInfo
-
-from telethon import functions, types
-from telethon.utils import get_attributes
+from telethon import types
 from telethon.errors import PhotoInvalidDimensionsError
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.tl.functions.messages import SendMediaRequest
+from telethon.utils import get_attributes
 
 from ..Config import Config
-from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import media_type, progress, thumb_from_audio
 from ..helpers.functions import (
@@ -37,8 +32,8 @@ from ..helpers.functions import (
     ud_frames,
     vid_to_gif,
 )
-from ..helpers.utils import _zedtools, _zedutils, _format
-from . import zedub, make_gif, progress
+from ..helpers.utils import _format, _zedtools, _zedutils
+from . import make_gif, progress, zedub
 
 plugin_category = "الادوات"
 
@@ -188,12 +183,16 @@ async def _(event):
         return
     input_str = event.pattern_match.group(1)
     if input_str is None:
-        await edit_or_reply(event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`")
+        await edit_or_reply(
+            event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`"
+        )
         return
     if input_str in ["صوت", "بصمه"]:
         event = await edit_or_reply(event, "**جاري التحويل...**")
     else:
-        await edit_or_reply(event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`")
+        await edit_or_reply(
+            event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`"
+        )
         return
     try:
         start = datetime.now()
@@ -283,11 +282,12 @@ async def _(event):
             )
             os.remove(new_required_file_name)
             await event.delete()
-            
+
 
 # ================================================================================================ #
 # =========================================تحويلات 2================================================= #
 # ================================================================================================ #
+
 
 @zedub.zed_cmd(pattern="spin(?: |$)((-)?(s)?)$")
 async def pic_gifcmd(event):  # sourcery no-metrics
@@ -442,17 +442,13 @@ async def video_catfile(event):  # sourcery no-metrics
             return await edit_delete(
                 catevent, "`No thumb found to make it video note`", 5
             )
-    if (
-        mediatype
-        in [
-            "Voice",
-            "Audio",
-            "Gif",
-            "Video",
-            "Sticker",
-        ]
-        and not catfile.endswith((".webp"))
-    ):
+    if mediatype in [
+        "Voice",
+        "Audio",
+        "Gif",
+        "Video",
+        "Sticker",
+    ] and not catfile.endswith((".webp")):
         if os.path.exists(PATH):
             c_time = time.time()
             attributes, mime_type = get_attributes(PATH)
@@ -627,7 +623,9 @@ async def pic_gifcmd(event):
     reply = await event.get_reply_message()
     mediatype = media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
-        return await edit_delete(event, "**╮ بالـرد ﮼؏ صـورة او ملصـق للتحـويل لمتحركـه ...𓅫╰**")
+        return await edit_delete(
+            event, "**╮ بالـرد ﮼؏ صـورة او ملصـق للتحـويل لمتحركـه ...𓅫╰**"
+        )
     if mediatype == "Sticker" and reply.document.mime_type == "application/i-tgsticker":
         return await edit_delete(
             event,
@@ -639,7 +637,8 @@ async def pic_gifcmd(event):
     imag = await _zedtools.media_to_pic(event, reply)
     if imag[1] is None:
         return await edit_delete(
-            imag[0], "**- اووبـس .. تعذر استخراج الصورة من الرسالة التي تم الرد عليها..**"
+            imag[0],
+            "**- اووبـس .. تعذر استخراج الصورة من الرسالة التي تم الرد عليها..**",
         )
     image = Image.open(imag[1])
     w, h = image.size
@@ -669,7 +668,8 @@ async def pic_gifcmd(event):
     output = await vid_to_gif("Output.gif", final)
     if output is None:
         await edit_delete(
-            catevent, "**- هناك خطـأ ما في الصـورة .. لا يمكنني تحويلهـا إلى متحركـة ؟! **"
+            catevent,
+            "**- هناك خطـأ ما في الصـورة .. لا يمكنني تحويلهـا إلى متحركـة ؟! **",
         )
         for i in [final, "Output.gif", imag[1]]:
             if os.path.exists(i):
@@ -688,7 +688,9 @@ async def _(event):
     reply = await event.get_reply_message()
     mediatype = media_type(event)
     if mediatype and mediatype != "video":
-        return await edit_delete(event, "**╮ بالـرد ﮼؏ فيديـو للتحـويل لمتحركـه ...𓅫╰**")
+        return await edit_delete(
+            event, "**╮ بالـرد ﮼؏ فيديـو للتحـويل لمتحركـه ...𓅫╰**"
+        )
     args = event.pattern_match.group(1)
     if not args:
         args = 2.0
@@ -697,7 +699,9 @@ async def _(event):
             args = float(args)
         except ValueError:
             args = 2.0
-    catevent = await edit_or_reply(event, "**╮ جـاري تحويل الفيديـو ✓ لمتحـركـه ﮼الـرجاء الانتظـار ...🎞🎆╰**")
+    catevent = await edit_or_reply(
+        event, "**╮ جـاري تحويل الفيديـو ✓ لمتحـركـه ﮼الـرجاء الانتظـار ...🎞🎆╰**"
+    )
     inputfile = await reply.download_media()
     outputfile = os.path.join(Config.TEMP_DIR, "vidtogif.gif")
     result = await vid_to_gif(inputfile, outputfile, speed=args)

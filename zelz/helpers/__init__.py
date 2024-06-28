@@ -12,7 +12,7 @@ while flag:
         from .progress import *
         from .qhelper import process
         from .tools import *
-        from .utils import _zedtools, _zedutils, _format
+        from .utils import _format, _zedtools, _zedutils
 
         break
     except ModuleNotFoundError as e:

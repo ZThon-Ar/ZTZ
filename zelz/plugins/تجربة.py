@@ -2,10 +2,9 @@ import io
 import sys
 import traceback
 
-from . import zedub
-
 from ..helpers.utils import _format
 from . import *
+from . import zedub
 
 
 @zedub.zed_cmd(pattern="امر التجربه")
@@ -21,7 +20,10 @@ async def hi(event):
 async def _(event):
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
-        return await edit_delete(event, "**- ادخـل الكـود مع الامــر كالتالـي**\n**- (.تجربه + الكـود البرمجـي)**")
+        return await edit_delete(
+            event,
+            "**- ادخـل الكـود مع الامــر كالتالـي**\n**- (.تجربه + الكـود البرمجـي)**",
+        )
     cmd = (
         cmd.replace("sendmessage", "send_message")
         .replace("sendfile", "send_file")

@@ -11,12 +11,10 @@ from PIL import Image
 from search_engine_parser import BingSearch, GoogleSearch, YahooSearch
 from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 
-from . import BOTLOG, BOTLOG_CHATID, Convert, zedub
-
-from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import deEmojify
 from ..helpers.utils import reply_id
+from . import BOTLOG, BOTLOG_CHATID, Convert, zedub
 
 opener = urllib.request.build_opener()
 useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
@@ -249,7 +247,9 @@ async def reverse(event):
         os.remove("okgoogle.png")
     message = await event.get_reply_message()
     if not message and not message.media:
-        return await edit_or_reply(event, "**بالرد على الصـورة للبحث عن شبيهاتها في جوجل ريـفرس**")
+        return await edit_or_reply(
+            event, "**بالرد على الصـورة للبحث عن شبيهاتها في جوجل ريـفرس**"
+        )
     photo = await Convert.to_image(
         event,
         message,
@@ -275,8 +275,7 @@ async def reverse(event):
     response = requests.post(searchUrl, files=multipart, allow_redirects=False)
     if response != 400:
         await event.edit(
-            "**تم تحميل الصورة بنجاح إلى جوجل✓**"
-            "\n**جـارِ تحليل المصدر الآن...**"
+            "**تم تحميل الصورة بنجاح إلى جوجل✓**" "\n**جـارِ تحليل المصدر الآن...**"
         )
     else:
         return await catevent.edit("`Unable to perform reverse search.`")
@@ -321,9 +320,7 @@ async def google_search(event):
     input_str = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
     if not input_str:
-        return await edit_delete(
-            event, "**- قم باضافة كلمـة للبحث ...**"
-        )
+        return await edit_delete(event, "**- قم باضافة كلمـة للبحث ...**")
     input_str = deEmojify(input_str).strip()
     if len(input_str) > 195 or len(input_str) < 1:
         return await edit_delete(

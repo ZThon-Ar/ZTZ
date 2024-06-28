@@ -1,12 +1,5 @@
-import html
-
-from telethon.tl import functions
-from telethon.tl.functions.users import GetFullUserRequest
-
-from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
-from ..sql_helper.globals import gvarstatus
 from ..sql_helper.echo_sql import (
     addecho,
     get_all_echos,
@@ -16,13 +9,14 @@ from ..sql_helper.echo_sql import (
     remove_echo,
     remove_echos,
 )
-from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, zedub, edit_delete, get_user_from_event
+from . import edit_delete, get_user_from_event, zedub
 
 LOGS = logging.getLogger(__name__)
 plugin_category = "العروض"
 # ================================================================================================ #
 # =========================================الازعاج================================================= #
 # ================================================================================================ #
+
 
 @zedub.zed_cmd(pattern="(تقليد|ازعاج)$")
 async def echo(event):
@@ -55,10 +49,16 @@ async def echo(event):
             "**- تم تفعيل امر التقليد على هذا الشخص\nسيتم تقليد جميع رسائله هنا**",
         )
 
-@zedub.zed_cmd(pattern="(الغاء تقليد|ايقاف التقليد|ايقاف تقليد|الغاء الازعاج|ايقاف الازعاج|ايقاف ازعاج|الغاء ازعاج)$")
+
+@zedub.zed_cmd(
+    pattern="(الغاء تقليد|ايقاف التقليد|ايقاف تقليد|الغاء الازعاج|ايقاف الازعاج|ايقاف ازعاج|الغاء ازعاج)$"
+)
 async def echo(event):
     if event.reply_to_msg_id is None:
-        return await edit_or_reply(event, "**- بالـرد على الشخص الذي قمت بـ ازعاجـه لايقاف الازعاج**\n**- ارسـل (.المقلدهم) لعـرض الاشخـاص الذي قمت بازعاجهم**")
+        return await edit_or_reply(
+            event,
+            "**- بالـرد على الشخص الذي قمت بـ ازعاجـه لايقاف الازعاج**\n**- ارسـل (.المقلدهم) لعـرض الاشخـاص الذي قمت بازعاجهم**",
+        )
     reply_msg = await event.get_reply_message()
     user_id = reply_msg.sender_id
     chat_id = event.chat_id

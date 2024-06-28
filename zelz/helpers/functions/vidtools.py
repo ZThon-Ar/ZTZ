@@ -12,7 +12,6 @@ from ..utils.utils import runcmd
 LOGS = logging.getLogger(__name__)
 
 
-
 async def vid_to_gif(inputfile, outputfile, speed=None, starttime=None, endtime=None):
     try:
         clip = VideoFileClip(inputfile)

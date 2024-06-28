@@ -1,4 +1,5 @@
 """ Download Youtube Video / Audio in a User friendly interface """
+
 # --------------------------- #
 #   Modded ytdl by code-rgb   #
 # --------------------------- #
@@ -65,7 +66,9 @@ async def iytdl_inline(event):
         input_url = (reply.text).strip()
     if not input_url:
         return await edit_delete(event, "**- بالـرد ع رابـط او كتـابة نص مـع الامـر**")
-    zedevent = await edit_or_reply(event, f"**⌔╎جـارِ البحث في اليوتيوب عـن:** `'{input_url}'`")
+    zedevent = await edit_or_reply(
+        event, f"**⌔╎جـارِ البحث في اليوتيوب عـن:** `'{input_url}'`"
+    )
     flag = True
     cout = 0
     results = None
@@ -121,9 +124,7 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
     callback_continue = f"جار تحميل {media_type} يرجى الانتظار"
     callback_continue += f"\n\nصيغـة الملـف : {disp_str}"
     await c_q.answer(callback_continue, alert=True)
-    upload_msg = await c_q.client.send_message(
-        BOTLOG_CHATID, "**⌔╎جـارِ الـرفـع ...**"
-    )
+    upload_msg = await c_q.client.send_message(BOTLOG_CHATID, "**⌔╎جـارِ الـرفـع ...**")
     yt_url = BASE_YT_URL + yt_code
     await c_q.edit(
         f"<b>⌔╎جـارِ تحميـل 🎧 {media_type} ...</b>\n\n  <a href={yt_url}>  <b>⌔╎الـرابـط 📎</b></a>\n🎚 <b>⌔╎الصيغـه </b> : {disp_str}",

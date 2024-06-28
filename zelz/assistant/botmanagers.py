@@ -3,15 +3,13 @@ from math import floor
 
 from telethon.utils import get_display_name
 
-from . import zedub
-
 from ..Config import Config
 from ..core.logger import logging
 from ..helpers import reply_id
 from ..helpers.utils import _format
 from ..sql_helper.bot_blacklists import add_user_to_bl, rem_user_from_bl
 from ..sql_helper.bot_pms_sql import get_user_id
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, BOTLOG_CHATID, zedub
 
 LOGS = logging.getLogger(__name__)
 

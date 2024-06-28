@@ -1,16 +1,17 @@
-import re
 import os
+import re
+
 try:
-    import enum
+    pass
 except ModuleNotFoundError:
     os.system("pip3 install enum")
-    import enum
 from enum import Enum
 
 from requests.exceptions import MissingSchema
 from requests.models import PreparedRequest
-from ..utils import runcmd
 from yt_dlp import YoutubeDL
+
+from ..utils import runcmd
 
 
 class Stream(Enum):

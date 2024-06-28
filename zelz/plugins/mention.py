@@ -1,8 +1,7 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 
-from . import zedub
-
 from ..helpers.utils import get_user_from_event, reply_id
+from . import zedub
 
 plugin_category = "الادمن"
 

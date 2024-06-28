@@ -12,11 +12,9 @@ import requests
 from selenium import webdriver
 from validators.url import url
 
-from . import zedub
-
 from ..Config import Config
 from ..core.managers import edit_or_reply
-from . import reply_id
+from . import reply_id, zedub
 
 plugin_category = "العروض"
 
@@ -56,16 +54,22 @@ async def _(event):
         if not inputstr and rmsg:
             inputstr = rmsg.text
         if not inputstr and not rmsg:
-            return await zzevent.edit("**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ...**")
+            return await zzevent.edit(
+                "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ...**"
+            )
         if cmd == "سكرين":
             caturl = url(inputstr)
             if not inputstr:
-                return await zzevent.edit("**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ...**")
+                return await zzevent.edit(
+                    "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ...**"
+                )
             if not caturl:
                 inputstr = f"http://{input_str}"
                 caturl = url(inputstr)
             if not caturl:
-                return await zzevent.edit("**- عـذراً .. الرابـط المدخـل ليس رابـط مدعـوم ؟!**")
+                return await zzevent.edit(
+                    "**- عـذراً .. الرابـط المدخـل ليس رابـط مدعـوم ؟!**"
+                )
         if cmd == "ss":
             inputstr = f"https://www.google.com/search?q={input_str}"
         driver.get(inputstr)

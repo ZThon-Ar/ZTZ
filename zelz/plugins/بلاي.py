@@ -1,13 +1,10 @@
+from ..core.managers import edit_or_reply
 from . import zedub
-from ..core.logger import logging
-
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
 
 plugin_category = "الترفيه"
 
 
-# بلاي 
+# بلاي
 M = (
     "**𓆰**  𝙎𝙊𝙐𝙍𝘾𝙀 𝙕𝙏𝙃𝙊𝙉   **العـاب الاونلايـن** 🎮𓆪 \n"
     "◐━─━─━─━─𝙕─━─━─━─━◐\n\n"

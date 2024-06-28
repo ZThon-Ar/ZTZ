@@ -162,7 +162,6 @@ async def animator(media, mainevent, textevent=None):
     return "animate.webm"
 
 
-
 # --------------------------------------------------------------------------------------------------------------------#
 
 
@@ -214,6 +213,7 @@ async def delete_conv(event, chat, from_message):
 
 
 # ----------------------------------------------## Tools ##------------------------------------------------------------#
+
 
 # https://www.tutorialspoint.com/How-do-you-split-a-list-into-evenly-sized-chunks-in-Python
 def sublists(input_list: list, width: int = 3):
@@ -431,6 +431,7 @@ def higlighted_text(
 
 
 # ----------------------------------------------## Sticker ##-----------------------------------------------------------#
+
 
 # for stickertxt
 async def waifutxt(text, chat_id, reply_to_id, bot):

@@ -7,7 +7,7 @@ try:
     from . import BASE, SESSION
 except ImportError as e:
     raise Exception("Memes For ZThon") from e
-from sqlalchemy import Column, Numeric, String, UnicodeText
+from sqlalchemy import Column, String
 
 
 class ZThonMemes(BASE):
@@ -18,6 +18,7 @@ class ZThonMemes(BASE):
     def __init__(self, meme_txt, meme_id):
         self.meme_txt = str(meme_txt)
         self.meme_id = str(meme_id)
+
 
 ZThonMemes.__table__.create(bind=SESSION.get_bind(), checkfirst=True)
 

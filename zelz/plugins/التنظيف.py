@@ -1,6 +1,5 @@
 # ZThon module for purging unneeded messages(usually spam or ot).
 import re
-import asyncio
 from asyncio import sleep
 
 from telethon.errors import rpcbaseerrors
@@ -17,11 +16,9 @@ from telethon.tl.types import (
     InputMessagesFilterVoice,
 )
 
-from . import zedub
-
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, BOTLOG_CHATID, zedub
 
 plugin_category = "الادوات"
 
@@ -65,7 +62,8 @@ async def delete_it(event):
                 await msg_src.delete()
                 if BOTLOG:
                     await event.client.send_message(
-                        BOTLOG_CHATID, "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**"
+                        BOTLOG_CHATID,
+                        "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**",
                     )
             except rpcbaseerrors.BadRequestError:
                 if BOTLOG:
@@ -82,7 +80,8 @@ async def delete_it(event):
                 await event.delete()
                 if BOTLOG:
                     await event.client.send_message(
-                        BOTLOG_CHATID, "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**"
+                        BOTLOG_CHATID,
+                        "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**",
                     )
             except rpcbaseerrors.BadRequestError:
                 await edit_or_reply(event, "**- عـذرا لا استـطيع حـذف هـذه الرسـالة**")
@@ -100,7 +99,7 @@ async def delete_it(event):
         "مثــال": "{tr}del 2",
     },
 )
-async def delete_it(event): #Code by T.me/zzzzl1l
+async def delete_it(event):  # Code by T.me/zzzzl1l
     "To delete replied message."
     input_str = event.pattern_match.group(1).strip()
     msg_src = await event.get_reply_message()
@@ -112,7 +111,8 @@ async def delete_it(event): #Code by T.me/zzzzl1l
                 await msg_src.delete()
                 if BOTLOG:
                     await event.client.send_message(
-                        BOTLOG_CHATID, "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**"
+                        BOTLOG_CHATID,
+                        "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**",
                     )
             except rpcbaseerrors.BadRequestError:
                 if BOTLOG:
@@ -129,7 +129,8 @@ async def delete_it(event): #Code by T.me/zzzzl1l
                 await event.delete()
                 if BOTLOG:
                     await event.client.send_message(
-                        BOTLOG_CHATID, "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**"
+                        BOTLOG_CHATID,
+                        "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**",
                     )
             except rpcbaseerrors.BadRequestError:
                 await edit_or_reply(event, "**- عـذرا لا استـطيع حـذف هـذه الرسـالة**")
@@ -184,7 +185,9 @@ async def purge_to(event):
             await event.client.delete_messages(chat, msgs)
         await edit_delete(
             event,
-            "**- التنظيف السريـع تم بنجـاح ✅**\n**- تم حـذف** " + str(count) + " **رسالـه 🗑**",
+            "**- التنظيف السريـع تم بنجـاح ✅**\n**- تم حـذف** "
+            + str(count)
+            + " **رسالـه 🗑**",
         )
         if BOTLOG:
             await event.client.send_message(
@@ -198,9 +201,9 @@ async def purge_to(event):
 @zedub.zed_cmd(pattern="حذف رسائلي")
 async def purgeme(event):
     message = event.text
-    if message: #Code by T.me/zzzzl1l
+    if message:  # Code by T.me/zzzzl1l
         count = int(message[12:])
-    else: #Code by T.me/zzzzl1l
+    else:  # Code by T.me/zzzzl1l
         count = int(10000)
     i = 1
     async for message in event.client.iter_messages(event.chat_id, from_user="me"):
@@ -216,7 +219,9 @@ async def purgeme(event):
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "#حـذف_رسـائلي \n\n**❈╎تـم حـذف** " + str(count) + "**رسـالـة . . بنجـاح ☑️**",
+            "#حـذف_رسـائلي \n\n**❈╎تـم حـذف** "
+            + str(count)
+            + "**رسـالـة . . بنجـاح ☑️**",
         )
     await sleep(5)
     await smsg.delete()
@@ -444,7 +449,9 @@ async def fastpurger(event):  # sourcery no-metrics
                 if msgs:
                     await event.client.delete_messages(chat, msgs)
             elif ty == "كلمه":
-                error += "\n✾╎لا تستطـيع استـخدام امر التنظيف عبر البحث مع الكلمـه المضـاف"
+                error += (
+                    "\n✾╎لا تستطـيع استـخدام امر التنظيف عبر البحث مع الكلمـه المضـاف"
+                )
 
             else:
                 error += f"\n✾╎`{ty}`  : هـذه الكلمـه المضـافه خاطئـة "
@@ -462,7 +469,9 @@ async def fastpurger(event):  # sourcery no-metrics
     if msgs:
         await event.client.delete_messages(chat, msgs)
     if count > 0:
-        result += "✾╎اكـتمل الـتنظيف السـريع\n✾╎تـم حـذف  " + str(count) + "من الـرسائل "
+        result += (
+            "✾╎اكـتمل الـتنظيف السـريع\n✾╎تـم حـذف  " + str(count) + "من الـرسائل "
+        )
     if error != "":
         result += f"\n\n**خـطأ:**{error}"
     if result == "":
@@ -587,7 +596,11 @@ async def fast_purger(event):  # sourcery no-metrics
     if msgs:
         await event.client.delete_messages(chat, msgs)
     if count > 0:
-        result += "**- حـذف رسائلـه تم بنجـاح ✅**\n**- تم حـذف** " + str(count) + "**رسالـه 🗑**"
+        result += (
+            "**- حـذف رسائلـه تم بنجـاح ✅**\n**- تم حـذف** "
+            + str(count)
+            + "**رسالـه 🗑**"
+        )
     if error != "":
         result += f"\n\n**- خطـأ :**{error}"
     if not result:

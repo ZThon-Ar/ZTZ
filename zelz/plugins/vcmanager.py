@@ -4,7 +4,9 @@
 from telethon import functions
 from telethon.errors import ChatAdminRequiredError, UserAlreadyInvitedError
 from telethon.tl.types import Channel, Chat, User
+
 from zelz import zedub
+
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import mentionuser
 
@@ -50,7 +52,9 @@ async def start_vc(event):
     vc_chat = await zedub.get_entity(event.chat_id)
     gc_call = await chat_vc_checker(event, vc_chat, False)
     if gc_call:
-        return await edit_delete(event, "**- المحادثـه الصوتيـه تم بـدئهـا مسبقـاً هنـا **")
+        return await edit_delete(
+            event, "**- المحادثـه الصوتيـه تم بـدئهـا مسبقـاً هنـا **"
+        )
     try:
         await zedub(
             functions.phone.CreateGroupCallRequest(
@@ -60,7 +64,11 @@ async def start_vc(event):
         )
         await edit_delete(event, "**- جـارِ بـدء محـادثـه صـوتيـه ...**")
     except ChatAdminRequiredError:
-        await edit_delete(event, "**- انت بحاجـه الى صلاحيـات المشـرف لبـدء محادثـه صوتيـه ...**", time=20)
+        await edit_delete(
+            event,
+            "**- انت بحاجـه الى صلاحيـات المشـرف لبـدء محادثـه صوتيـه ...**",
+            time=20,
+        )
 
 
 @zedub.zed_cmd(
@@ -81,7 +89,11 @@ async def end_vc(event):
         await zedub(functions.phone.DiscardGroupCallRequest(call=gc_call))
         await edit_delete(event, "**- تم انهـاء المحـادثـه الصـوتيـه .. بنجـاح ✓**")
     except ChatAdminRequiredError:
-        await edit_delete(event, "**- انت بحاجـه الى صلاحيـات المشـرف لـ انهـاء المحادثـه الصوتيـه ...**", time=20)
+        await edit_delete(
+            event,
+            "**- انت بحاجـه الى صلاحيـات المشـرف لـ انهـاء المحادثـه الصوتيـه ...**",
+            time=20,
+        )
 
 
 @zedub.zed_cmd(
@@ -173,7 +185,9 @@ async def title_vc(event):
     if not title:
         return await edit_delete("What should i keep as title")
     await zedub(functions.phone.EditGroupCallTitleRequest(call=gc_call, title=title))
-    await edit_delete(event, f"**- تم تغييـر عنـوان المكالمـه الـى {title} .. بنجـاح ✓**")
+    await edit_delete(
+        event, f"**- تم تغييـر عنـوان المكالمـه الـى {title} .. بنجـاح ✓**"
+    )
 
 
 @zedub.zed_cmd(

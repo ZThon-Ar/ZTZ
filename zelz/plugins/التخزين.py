@@ -1,15 +1,13 @@
 import asyncio
 
-from . import zedub
-from ..core.logger import logging
-
 from ..Config import Config
+from ..core.logger import logging
 from ..core.managers import edit_delete
 from ..helpers.tools import media_type
 from ..helpers.utils import _format
 from ..sql_helper import no_log_pms_sql
-from ..sql_helper.globals import addgvar, gvarstatus, delgvar
-from . import BOTLOG, BOTLOG_CHATID
+from ..sql_helper.globals import addgvar, delgvar, gvarstatus
+from . import BOTLOG, BOTLOG_CHATID, zedub
 
 LOGS = logging.getLogger(__name__)
 
@@ -81,7 +79,11 @@ async def log_tagged_messages(event):
         if full is not None:
             fullusername = f"@{full.username}" if full.username else "لايوجد"
             fullid = full.id
-            fullname = f"{full.first_name} {full.last_name}" if full.last_name else full.first_name
+            fullname = (
+                f"{full.first_name} {full.last_name}"
+                if full.last_name
+                else full.first_name
+            )
             resalt += f"\n\n<b>¶ معـلومـات المـرسـل :</b>"
             resalt += f"\n<b>⌔ الاسـم : </b> {fullname}"
             resalt += f"\n<b>⌔ الايـدي : </b> <code>{fullid}</code>"
@@ -127,11 +129,15 @@ async def log(log_text):
             textx = user + log_text.pattern_match.group(1)
             await log_text.client.send_message(BOTLOG_CHATID, textx)
         else:
-            await log_text.edit("**⌔ بالــرد على اي رسـاله لحفظهـا في كـروب التخــزين**")
+            await log_text.edit(
+                "**⌔ بالــرد على اي رسـاله لحفظهـا في كـروب التخــزين**"
+            )
             return
         await log_text.edit("**⌔ تـم الحفـظ في كـروب التخـزين .. بنجـاح ✓**")
     else:
-        await log_text.edit("**⌔ عـذراً .. هـذا الامـر يتطلـب تفعيـل فـار التخـزين اولاً**")
+        await log_text.edit(
+            "**⌔ عـذراً .. هـذا الامـر يتطلـب تفعيـل فـار التخـزين اولاً**"
+        )
     await asyncio.sleep(2)
     await log_text.delete()
 

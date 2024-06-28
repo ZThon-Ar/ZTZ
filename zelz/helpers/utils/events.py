@@ -45,9 +45,7 @@ async def get_chatinfo(event, match, zedevent):
             await zedevent.edit("- عذرا هذه المجموعة او القناة غير صحيحة")
             return None
         except ChannelPrivateError:
-            await zedevent.edit(
-                "- يبدو انه هذه مجموعة او قناة خاصة او ربما محظور منها"
-            )
+            await zedevent.edit("- يبدو انه هذه مجموعة او قناة خاصة او ربما محظور منها")
             return None
         except ChannelPublicGroupNaError:
             await zedevent.edit("- هذه القناه او المجموعه لم يتم العثور عليها")

@@ -1,19 +1,14 @@
-import json
-import math
-import os
 import random
 import re
-import time
-from pathlib import Path
 from uuid import uuid4
 
 from telethon import Button, types
 from telethon.errors import QueryIdInvalidError
-from telethon.events import CallbackQuery, InlineQuery
+from telethon.events import InlineQuery
 from youtubesearchpython import VideosSearch
 
-from . import zedub
 from ..Config import Config
+from ..core.logger import logging
 from ..helpers.functions import rand_key
 from ..helpers.functions.utube import (
     download_button,
@@ -23,12 +18,13 @@ from ..helpers.functions.utube import (
     ytsearch_data,
 )
 from ..sql_helper.globals import gvarstatus
-from ..core.logger import logging
+from . import zedub
 
 LOGS = logging.getLogger(__name__)
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 MEDIA_PATH_REGEX = re.compile(r"(:?\<\bmedia:(:?(?:.*?)+)\>)")
 tr = Config.COMMAND_HAND_LER
+
 
 def ibuild_keyboard(buttons):
     keyb = []
@@ -38,6 +34,7 @@ def ibuild_keyboard(buttons):
         else:
             keyb.append([Button.url(btn[0], btn[1])])
     return keyb
+
 
 @zedub.tgbot.on(InlineQuery)
 async def inline_handler(event):  # sourcery no-metrics

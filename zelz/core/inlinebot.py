@@ -1,22 +1,28 @@
 import json
-import math
 import os
 import random
 import re
 import time
 from uuid import uuid4
-from platform import python_version
-from telethon import Button, types, version
+
+from telethon import Button, types
 from telethon.errors import QueryIdInvalidError
-from telethon.events import CallbackQuery, InlineQuery
+from telethon.events import InlineQuery
 from youtubesearchpython import VideosSearch
-from zelz import zedub, zedversion, StartTime
+
+from zelz import zedub
+
 from ..Config import Config
-from ..helpers.functions import rand_key, zedalive, check_data_base_heal_th, get_readable_time
-from ..helpers.functions.utube import download_button, get_yt_video_id, get_ytthumb, result_formatter, ytsearch_data
-from ..plugins import mention
+from ..helpers.functions import rand_key
+from ..helpers.functions.utube import (
+    download_button,
+    get_yt_video_id,
+    get_ytthumb,
+    result_formatter,
+    ytsearch_data,
+)
 from ..sql_helper.globals import gvarstatus
-from . import CMD_INFO, GRP_INFO, PLG_INFO, check_owner
+from . import GRP_INFO
 from .logger import logging
 
 LOGS = logging.getLogger(__name__)
@@ -25,6 +31,7 @@ BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>
 MEDIA_PATH_REGEX = re.compile(r"(:?\<\bmedia:(:?(?:.*?)+)\>)")
 tr = Config.COMMAND_HAND_LER
 
+
 def getkey(val):
     for key, value in GRP_INFO.items():
         for plugin in value:
@@ -32,9 +39,11 @@ def getkey(val):
                 return key
     return None
 
+
 def get_thumb(name):
     url = f"https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Inline/{name}?raw=true"
     return types.InputWebDocument(url=url, size=0, mime_type="image/png", attributes=[])
+
 
 def ibuild_keyboard(buttons):
     keyb = []
@@ -44,6 +53,7 @@ def ibuild_keyboard(buttons):
         else:
             keyb.append([Button.url(btn[0], btn[1])])
     return keyb
+
 
 @zedub.tgbot.on(InlineQuery)
 async def inline_handler(event):  # sourcery no-metrics
@@ -102,20 +112,24 @@ async def inline_handler(event):  # sourcery no-metrics
                 jsondata = False
             timestamp = int(time.time() * 2)
             new_msg = {
-                str(timestamp): {"text": query}
-                if match3
-                else {"userid": user_list, "text": query}
+                str(timestamp): (
+                    {"text": query} if match3 else {"userid": user_list, "text": query}
+                )
             }
             buttons = [Button.inline(info_type[2], data=f"{info_type[0]}_{timestamp}")]
             result = builder.article(
                 title=f"{info_type[0].title()} message  to {sandy}.",
-                description="Send hidden text in chat."
-                if match3
-                else f"Only he/she/they {info_type[1]} open it.",
+                description=(
+                    "Send hidden text in chat."
+                    if match3
+                    else f"Only he/she/they {info_type[1]} open it."
+                ),
                 thumb=get_thumb(f"{info_type[0]}.png"),
-                text="✖✖✖"
-                if match3
-                else f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                text=(
+                    "✖✖✖"
+                    if match3
+                    else f"🔒 A whisper message to {sandy}, Only he/she can open it."
+                ),
                 buttons=buttons,
             )
             await event.answer([result] if result else None)

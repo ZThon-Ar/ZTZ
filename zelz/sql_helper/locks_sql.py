@@ -4,10 +4,9 @@
 # This file is a part of < https://github.com/Zed-Thon/ZelZal/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/Zed-Thon/ZelZal/blob/master/LICENSE/>.
-from sqlalchemy import Column, String, Boolean
+from sqlalchemy import Boolean, Column, String
 
 from . import BASE, SESSION
-
 
 
 class Permissions(BASE):
@@ -82,7 +81,6 @@ class Restrictions(BASE):
 Permissions.__table__.create(bind=SESSION.get_bind(), checkfirst=True)
 # Permissions.__table__.drop()
 Restrictions.__table__.create(bind=SESSION.get_bind(), checkfirst=True)
-
 
 
 def init_permissions(chat_id, reset=False):

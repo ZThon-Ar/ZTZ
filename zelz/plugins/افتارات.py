@@ -1,26 +1,16 @@
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
-#الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
 
-import asyncio
-import os
-from secrets import choice
 import random
-from urllib.parse import quote_plus
-from collections import deque
-from telethon import events
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import InputMessagesFilterVideo, InputMessagesFilterVoice, InputMessagesFilterPhotos
 
+from telethon.tl.types import (
+    InputMessagesFilterPhotos,
+    InputMessagesFilterVideo,
+    InputMessagesFilterVoice,
+)
+
+from ..core.managers import edit_or_reply
 from . import zedub
-
-from ..core.logger import logging
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
-from . import ALIVE_NAME, mention
-from ..helpers import get_user_from_event
-from ..helpers.utils import _format
-
-from . import reply_id
 
 
 @zedub.zed_cmd(pattern="حالات$")
@@ -33,7 +23,7 @@ async def _(event):
                 "@RSHDO5", filter=InputMessagesFilterVideo
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
@@ -54,7 +44,7 @@ async def _(event):
                 "@AA_Zll", filter=InputMessagesFilterVideo
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
@@ -75,7 +65,7 @@ async def _(event):
                 "@Rqy_1", filter=InputMessagesFilterVoice
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
@@ -96,7 +86,7 @@ async def _(event):
                 "@shababbbbR", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -117,7 +107,7 @@ async def _(event):
                 "@banatttR", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -138,7 +128,7 @@ async def _(event):
                 "@Tatkkkkkim", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -159,7 +149,7 @@ async def _(event):
                 "@tatkkkkkimh", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -180,7 +170,7 @@ async def _(event):
                 "@reagshn", filter=InputMessagesFilterVideo
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
@@ -201,7 +191,7 @@ async def _(event):
                 "@snje1", filter=InputMessagesFilterVideo
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
@@ -222,7 +212,7 @@ async def _(event):
                 "@TEAMSUL", filter=InputMessagesFilterVoice
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
@@ -231,7 +221,7 @@ async def _(event):
         await zzevent.delete()
     except Exception:
         await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
-        
+
 
 @zedub.zed_cmd(pattern="شعر$")
 async def _(event):
@@ -243,7 +233,7 @@ async def _(event):
                 "@L1BBBL", filter=InputMessagesFilterVoice
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
@@ -264,7 +254,7 @@ async def _(event):
                 "@MemzWaTaN", filter=InputMessagesFilterVoice
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
@@ -285,7 +275,7 @@ async def _(event):
                 "@gafffg", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedre),
@@ -306,7 +296,7 @@ async def _(event):
                 "@A_l3l", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -327,7 +317,7 @@ async def _(event):
                 "@twit_selva", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedre),
@@ -348,7 +338,7 @@ async def _(event):
                 "@SourceSaidi", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -369,7 +359,7 @@ async def _(event):
                 "@dnndxn", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -390,7 +380,7 @@ async def _(event):
                 "@shhdhn", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -411,7 +401,7 @@ async def _(event):
                 "@banaaaat1", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -420,5 +410,3 @@ async def _(event):
         await zzevent.delete()
     except Exception:
         await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
-
-

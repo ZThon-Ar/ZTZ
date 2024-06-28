@@ -7,10 +7,11 @@ import logging
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.tl.types import User
+
 from zelz import zedub
+
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
-
 from ..vc_zelzal.stream_helper import Stream
 from ..vc_zelzal.tg_downloader import tg_dl
 from ..vc_zelzal.vcp_helper import ZedVC
@@ -97,7 +98,8 @@ async def joinVoicechat(event):
 
     if joinas and not vc_chat.username:
         await edit_or_reply(
-            event, "**- لم استطـع الانضمـام الى الدردشـه الخـاصه .. قم بالانضمـام يدويـاً ...**"
+            event,
+            "**- لم استطـع الانضمـام الى الدردشـه الخـاصه .. قم بالانضمـام يدويـاً ...**",
         )
         joinas = False
 
@@ -149,7 +151,9 @@ async def get_playlist(event):
                 zed += f"{num}-  `{item['title']}`\n"
             else:
                 zed += f"{num}- `{item['title']}`\n"
-        await edit_delete(event, f"**- قائمـة التشغيـل :**\n\n{zed}\n**Enjoy the show**")
+        await edit_delete(
+            event, f"**- قائمـة التشغيـل :**\n\n{zed}\n**Enjoy the show**"
+        )
 
 
 @zedub.zed_cmd(
@@ -186,10 +190,16 @@ async def play_video(event):
             event, "**- قـم بـ إدخـال رابـط مقطع الفيديـو للتشغيـل...**", time=20
         )
     if not vc_player.CHAT_ID:
-        return await edit_or_reply(event, "**- قـم بالانضمـام اولاً الى المكالمـه عبـر الامـر .انضم**")
+        return await edit_or_reply(
+            event, "**- قـم بالانضمـام اولاً الى المكالمـه عبـر الامـر .انضم**"
+        )
     if not input_str:
-        return await edit_or_reply(event, "**- قـم بـ إدخـال رابـط مقطع الفيديـو للتشغيـل...**")
-    await edit_or_reply(event, "**╮ جـارِ تشغيـل مقطـٓـع الفيـٓـديو في المكـالمـه... 🎧♥️╰**")
+        return await edit_or_reply(
+            event, "**- قـم بـ إدخـال رابـط مقطع الفيديـو للتشغيـل...**"
+        )
+    await edit_or_reply(
+        event, "**╮ جـارِ تشغيـل مقطـٓـع الفيـٓـديو في المكـالمـه... 🎧♥️╰**"
+    )
     if flag:
         resp = await vc_player.play_song(input_str, Stream.video, force=True)
     else:
@@ -229,10 +239,16 @@ async def play_audio(event):
             event, "**- قـم بـ إدخـال رابـط المقطـع الصوتـي للتشغيـل...**", time=20
         )
     if not vc_player.CHAT_ID:
-        return await edit_or_reply(event, "**- قـم بالانضمـام اولاً الى المكالمـه عبـر الامـر .انضم**")
+        return await edit_or_reply(
+            event, "**- قـم بالانضمـام اولاً الى المكالمـه عبـر الامـر .انضم**"
+        )
     if not input_str:
-        return await edit_or_reply(event, "**- قـم بـ إدخـال رابـط المقطـع الصوتـي للتشغيـل...**")
-    await edit_or_reply(event, "**╮ جـارِ تشغيـل المقطـٓـع الصـٓـوتي في المكـالمـه... 🎧♥️╰**")
+        return await edit_or_reply(
+            event, "**- قـم بـ إدخـال رابـط المقطـع الصوتـي للتشغيـل...**"
+        )
+    await edit_or_reply(
+        event, "**╮ جـارِ تشغيـل المقطـٓـع الصـٓـوتي في المكـالمـه... 🎧♥️╰**"
+    )
     if flag:
         resp = await vc_player.play_song(input_str, Stream.audio, force=True)
     else:

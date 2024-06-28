@@ -9,19 +9,44 @@
 # =========================================================== #
 import json
 import os
-from PIL import Image
+
 import requests
 from googletrans import LANGUAGES
+from PIL import Image
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import getTranslate
-from ..sql_helper.globals import gvarstatus
-from . import Convert, zedub, soft_deEmojify
+from . import Convert, soft_deEmojify, zedub
 
 plugin_category = "الادوات"
 
-glist = ["انكلش", "عربي", "بلغاري", "صيني", "صيني2", "كرواتي", "Czech", "Danish", "Dutch", "فيني", "فرنسي", "الماني", "يوناني", "هنغاري", "كوري", "ايطالي", "ياباني", "بولندي", "برتغالي", "روسي", "سلوفاني", "اسباني", "سويدي", "تركي"]
+glist = [
+    "انكلش",
+    "عربي",
+    "بلغاري",
+    "صيني",
+    "صيني2",
+    "كرواتي",
+    "Czech",
+    "Danish",
+    "Dutch",
+    "فيني",
+    "فرنسي",
+    "الماني",
+    "يوناني",
+    "هنغاري",
+    "كوري",
+    "ايطالي",
+    "ياباني",
+    "بولندي",
+    "برتغالي",
+    "روسي",
+    "سلوفاني",
+    "اسباني",
+    "سويدي",
+    "تركي",
+]
 oldlang = {
     "انكلش": "eng",
     "عربي": "ara",
@@ -49,6 +74,7 @@ oldlang = {
     "تركي": "tur",
 }
 
+
 def conv_image(image):
     im = Image.open(image)
     im.save(image, "PNG")
@@ -57,8 +83,10 @@ def conv_image(image):
     return new_file_name
 
 
-def ocr_space_file(filename, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language='eng'):
-    """ OCR.space API request with local file.
+def ocr_space_file(
+    filename, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language="eng"
+):
+    """OCR.space API request with local file.
         Python3.5 - not tested on 2.7
     :param filename: Your file path & name.
     :param overlay: Is OCR.space overlay required in your response.
@@ -71,20 +99,22 @@ def ocr_space_file(filename, overlay=False, api_key=Config.OCR_SPACE_API_KEY, la
     :return: Result in JSON format.
     """
 
-    payload = {'isOverlayRequired': overlay,
-               'apikey': api_key,
-               'language': language,
-               }
-    with open(filename, 'rb') as f:
-        r = requests.post('https://api.ocr.space/parse/image',
-                          files={filename: f},
-                          data=payload,
-                          )
+    payload = {
+        "isOverlayRequired": overlay,
+        "apikey": api_key,
+        "language": language,
+    }
+    with open(filename, "rb") as f:
+        r = requests.post(
+            "https://api.ocr.space/parse/image",
+            files={filename: f},
+            data=payload,
+        )
     return r.json()
 
 
-def ocr_space_url(url, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language='eng'):
-    """ OCR.space API request with remote file.
+def ocr_space_url(url, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language="eng"):
+    """OCR.space API request with remote file.
         Python3.5 - not tested on 2.7
     :param url: Image url.
     :param overlay: Is OCR.space overlay required in your response.
@@ -97,20 +127,25 @@ def ocr_space_url(url, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language
     :return: Result in JSON format.
     """
 
-    payload = {'url': url,
-               'isOverlayRequired': overlay,
-               'apikey': api_key,
-               'language': language,
-               }
-    r = requests.post('https://api.ocr.space/parse/image',
-                      data=payload,
-                      )
+    payload = {
+        "url": url,
+        "isOverlayRequired": overlay,
+        "apikey": api_key,
+        "language": language,
+    }
+    r = requests.post(
+        "https://api.ocr.space/parse/image",
+        data=payload,
+    )
     return r.json()
 
 
 def progress(current, total):
-    logger.info("Downloaded {} of {}\nCompleted {}".format(
-        current, total, (current / total) * 100))
+    logger.info(
+        "Downloaded {} of {}\nCompleted {}".format(
+            current, total, (current / total) * 100
+        )
+    )
 
 
 @zedub.zed_cmd(pattern="اللغات")
@@ -159,8 +194,7 @@ async def parse_ocr_space_api(event):
         if lang_code in oldlang:
             langcode = oldlang[lang_code]
     downloaded_file_name = await zedub.download_media(
-        await event.get_reply_message(),
-        Config.TEMP_DIR
+        await event.get_reply_message(), Config.TEMP_DIR
     )
     if downloaded_file_name.endswith((".webp")):
         downloaded_file_name = conv_image(downloaded_file_name)
@@ -168,14 +202,23 @@ async def parse_ocr_space_api(event):
     ParsedText = "hmm"
     try:
         ParsedText = test_file["ParsedResults"][0]["ParsedText"]
-        ProcessingTimeInMilliseconds = str(int(test_file["ProcessingTimeInMilliseconds"]) // 1000)
+        ProcessingTimeInMilliseconds = str(
+            int(test_file["ProcessingTimeInMilliseconds"]) // 1000
+        )
     except Exception as e:
-        await event.edit("**- اووبـس حدث خطـأ :**\n**-الخطأ :** `{}`\n`{}`".format(str(e), json.dumps(test_file, sort_keys=True, indent=4)))
+        await event.edit(
+            "**- اووبـس حدث خطـأ :**\n**-الخطأ :** `{}`\n`{}`".format(
+                str(e), json.dumps(test_file, sort_keys=True, indent=4)
+            )
+        )
     else:
-        await event.edit("**⎉╎تم جلب النص من الميديـا\n**⎉╎خـلال {} ثـانيـه...**\n\n`{}`".format(ProcessingTimeInMilliseconds, ParsedText))
+        await event.edit(
+            "**⎉╎تم جلب النص من الميديـا\n**⎉╎خـلال {} ثـانيـه...**\n\n`{}`".format(
+                ProcessingTimeInMilliseconds, ParsedText
+            )
+        )
     os.remove(downloaded_file_name)
     await event.edit(ParsedText)
-
 
 
 @zedub.zed_cmd(
@@ -192,7 +235,9 @@ async def ocr(event):
     "To read text in media."
     reply = await event.get_reply_message()
     if not event.reply_to_msg_id or not reply.media:
-        return await edit_delete(event, "**- بالـرد ع ميديـا لاستخـراج النص منهـا ...**")
+        return await edit_delete(
+            event, "**- بالـرد ع ميديـا لاستخـراج النص منهـا ...**"
+        )
     zevent = await edit_or_reply(event, "**⎉╎جـارِ جلب النص من الميديـا ▬▭ ...**")
     if not os.path.isdir(Config.TEMP_DIR):
         os.makedirs(Config.TEMP_DIR)
@@ -202,9 +247,7 @@ async def ocr(event):
         event, reply, dirct="./temp", file="image.png", rgb=True, noedits=True
     )
     if not output_file[1]:
-        return await edit_delete(
-            zevent, "**- هل انت متأكد من ان هذه صـورة ؟!**"
-        )
+        return await edit_delete(zevent, "**- هل انت متأكد من ان هذه صـورة ؟!**")
     if lang_code in glist:
         if lang_code in oldlang:
             langcode = oldlang[lang_code]
@@ -227,7 +270,9 @@ async def ocr(event):
                     soft_deEmojify(ParsedText), dest=TRT_LANG
                 )
             except ValueError:
-                return await edit_delete(zevent, "**- حدث خطـأ بالتعـرف على اللغـه ؟!**")
+                return await edit_delete(
+                    zevent, "**- حدث خطـأ بالتعـرف على اللغـه ؟!**"
+                )
             source_lan = LANGUAGES[f"{reply_text.src.lower()}"]
             transl_lan = LANGUAGES[f"{reply_text.dest.lower()}"]
             tran_text = f"📜**الترجمـة :-\n- مـن {source_lan.title()}({reply_text.src.lower()}) الـى {transl_lan.title()}({reply_text.dest.lower()}) :**\n\n`{reply_text.text}`"

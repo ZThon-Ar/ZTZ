@@ -3,14 +3,12 @@ from datetime import datetime
 
 from telethon.tl import functions, types
 
-from . import zedub
-
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
 from ..helpers.utils import _format
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, BOTLOG_CHATID, zedub
 
 plugin_category = "البوت"
 

@@ -13,12 +13,10 @@ import requests
 from bs4 import BeautifulSoup
 from PIL import Image, ImageDraw, ImageFont
 
-from . import zedub
-
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import clippy
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from . import convert_toimage, reply_id
+from . import convert_toimage, reply_id, zedub
 
 # ======================================================================================================================================================================================
 
@@ -395,7 +393,9 @@ async def cat(event):
                 os.remove("./temp/logo.ttf")
             delgvar(var)
             await edit_delete(
-                event, f"📑 Value of **{var}** is now deleted & set to default.", time=60
+                event,
+                f"📑 Value of **{var}** is now deleted & set to default.",
+                time=60,
             )
     elif not input_str and cmd == "r":
         delgvar("LOGO_BACKGROUND")

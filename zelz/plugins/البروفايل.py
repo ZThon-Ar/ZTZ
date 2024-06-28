@@ -1,18 +1,16 @@
 import os
-import random
 
 from telethon.errors.rpcerrorlist import UsernameOccupiedError
 from telethon.tl import functions
 from telethon.tl.functions.account import UpdateUsernameRequest
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
 from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosRequest
-from telethon.tl.types import Channel, Chat, InputPhoto, User, InputMessagesFilterEmpty
-
-from . import zedub
+from telethon.tl.types import Channel, Chat, InputPhoto, User
 
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
+from . import zedub
 
 LOGS = logging.getLogger(__name__)
 
@@ -31,6 +29,7 @@ INVALID_MEDIA = "⎉╎امتداد هذه الصورة غير صالح"
 #                                                             𝙕𝙏𝙝𝙤𝙣
 # =========================================================== #
 
+
 @zedub.zed_cmd(pattern="ضع بايو(?: |$)(.*)")
 async def _(event):
     bio = event.pattern_match.group(1)
@@ -38,7 +37,9 @@ async def _(event):
     if not bio and reply:
         bio = reply.text
     if not bio:
-        return await edit_delete(event, "**- ارسـل (.ضع بايو) + البايـو او بالـرد ع البايـو**", 10)
+        return await edit_delete(
+            event, "**- ارسـل (.ضع بايو) + البايـو او بالـرد ع البايـو**", 10
+        )
     try:
         await event.client(functions.account.UpdateProfileRequest(about=bio))
         await edit_delete(event, BIO_OK)
@@ -53,7 +54,9 @@ async def _(event):
     if not names and reply:
         names = reply.text
     if not names:
-        return await edit_delete(event, "**- ارسـل (.ضع اسم) + الاسـم او بالـرد ع الاسـم**", 10)
+        return await edit_delete(
+            event, "**- ارسـل (.ضع اسم) + الاسـم او بالـرد ع الاسـم**", 10
+        )
     first_name = names
     last_name = ""
     if ";" in names:
@@ -75,9 +78,7 @@ async def _(event):
     if not reply_message:
         return await edit_delete(event, "**- ارســل (.ضع صورة) بالــرد ع الصـورة**", 10)
     reply_message = await event.get_reply_message()
-    catevent = await edit_or_reply(
-        event, "**...**"
-    )
+    catevent = await edit_or_reply(event, "**...**")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     photo = None
@@ -125,7 +126,9 @@ async def update_username(username):
     if not newusername and reply:
         newusername = reply.text
     if not newusername:
-        return await edit_delete(event, "**- ارسـل (.ضع يوزر) + اليـوزر او بالـرد ع اليـوزر**", 10)
+        return await edit_delete(
+            event, "**- ارسـل (.ضع يوزر) + اليـوزر او بالـرد ع اليـوزر**", 10
+        )
     try:
         await username.client(UpdateUsernameRequest(newusername))
         await edit_delete(event, USERNAME_OK)
@@ -173,7 +176,7 @@ async def count(event):
 
 @zedub.zed_cmd(pattern="حذف صوره ?(.*)")
 async def remove_profilepic(delpfp):
-#.حذف صوره <رقم الصورة> | .حذف صوره
+    # .حذف صوره <رقم الصورة> | .حذف صوره
     group = delpfp.text[8:]
     if group == "الكل":
         lim = 0
@@ -194,7 +197,8 @@ async def remove_profilepic(delpfp):
     ]
     await delpfp.client(DeletePhotosRequest(id=input_photos))
     await edit_delete(
-        delpfp, f"**⎉╎تـم حـذف الصـورة رقـم** {len(input_photos)}\n**⎉╎مـن حسـابك .. بنجـاح ✅**"
+        delpfp,
+        f"**⎉╎تـم حـذف الصـورة رقـم** {len(input_photos)}\n**⎉╎مـن حسـابك .. بنجـاح ✅**",
     )
 
 

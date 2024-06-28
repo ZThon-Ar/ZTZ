@@ -1,20 +1,19 @@
-#ZedThon
+# ZedThon
 
 import asyncio
 import os
 import time
 from datetime import datetime
 
-from . import zedub
-
 from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
+from ..core.managers import edit_or_reply
 from ..helpers.utils import reply_id
-from . import progress, reply_id
+from . import progress, reply_id, zedub
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
 
 blocked_word = ["وقتي", "الوقتي", "تلقائي", "التلقائي"]
+
 
 @zedub.zed_cmd(pattern="rename (.*)")
 async def _(event):
@@ -181,4 +180,3 @@ async def _(event):
             await zedevent.delete()
         else:
             await zedevent.edit("File Not Found {}".format(input_str))
-

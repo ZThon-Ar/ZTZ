@@ -22,8 +22,8 @@ from telethon.tl.types import (
 )
 from telethon.utils import add_surrogate, del_surrogate
 
-from . import zedub
 from ..core.logger import logging
+from . import zedub
 
 LOGS = logging.getLogger(__name__)
 

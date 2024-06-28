@@ -4,10 +4,8 @@ from telethon.errors.rpcbaseerrors import ForbiddenError
 from telethon.errors.rpcerrorlist import PollOptionInvalidError
 from telethon.tl.types import InputMediaPoll, Poll
 
-from . import zedub
-
 from ..core.managers import edit_or_reply
-from . import Build_Poll, reply_id
+from . import Build_Poll, reply_id, zedub
 
 plugin_category = "البوت"
 
@@ -43,7 +41,8 @@ async def pollcreator(catpoll):
             await catpoll.delete()
         except PollOptionInvalidError:
             await edit_or_reply(
-                catpoll, "**⌔∮ الاستفتاء المستخدم غير صالح (قد تكون المعلومات طويلة جدا).**"
+                catpoll,
+                "**⌔∮ الاستفتاء المستخدم غير صالح (قد تكون المعلومات طويلة جدا).**",
             )
         except ForbiddenError:
             await edit_or_reply(catpoll, "**⌔∮ هذه الدردشة تحظر استطلاعات الرأي. **")
@@ -72,7 +71,9 @@ async def pollcreator(catpoll):
                     "**⌔∮ الاستفتاء المستخدم غير صالح (قد تكون المعلومات طويلة جدا).**",
                 )
             except ForbiddenError:
-                await edit_or_reply(catpoll, "**⌔∮ هذه الدردشة تحظر استطلاعات الرأي. **")
+                await edit_or_reply(
+                    catpoll, "**⌔∮ هذه الدردشة تحظر استطلاعات الرأي. **"
+                )
             except Exception as e:
                 await edit_or_reply(catpoll, str(e))
         else:

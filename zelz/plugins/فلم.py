@@ -8,11 +8,10 @@ import os
 from justwatch import JustWatch, justwatchapi
 from pySmartDL import SmartDL
 
-from . import zedub
-
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_or_reply
+from . import zedub
 
 LOGS = logging.getLogger(__name__)
 plugin_category = "الادوات"

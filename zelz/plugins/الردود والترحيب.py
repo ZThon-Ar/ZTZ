@@ -1,21 +1,20 @@
-import re
 import datetime
+import re
 from asyncio import sleep
 
 from telethon import events
 from telethon.utils import get_display_name
 
-from . import zedub
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper import pmpermit_sql as pmpermit_sql
-from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from ..sql_helper.filter_sql import (
     add_filter,
     get_filters,
     remove_all_filters,
     remove_filter,
 )
+from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from ..sql_helper.welcome_sql import (
     add_welcome_setting,
     get_current_welcome_settings,
@@ -27,7 +26,7 @@ from ..sql_helper.welcomesql import (
     getcurrent_welcome_settings,
     rmwelcome_setting,
 )
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, BOTLOG_CHATID, zedub
 
 plugin_category = "الخدمات"
 LOGS = logging.getLogger(__name__)
@@ -82,6 +81,7 @@ ZelzalWF_cmd = (
 async def cmd(zelzallll):
     await edit_or_reply(zelzallll, ZelzalWF_cmd)
 
+
 @zedub.zed_cmd(pattern="الترحيب")
 async def cmd(zelzallll):
     await edit_or_reply(zelzallll, ZelzalWF_cmd)
@@ -94,11 +94,10 @@ async def filter_incoming_handler(event):
     if not filters:
         return
     a_user = await event.get_sender()
-    chat = await event.get_chat()
+    await event.get_chat()
     me = await event.client.get_me()
     title = get_display_name(await event.get_chat()) or "هـذه الدردشــه"
-    #participants = await event.client.get_participants(chat)
-    count = None
+    # participants = await event.client.get_participants(chat)
     mention = f"[{a_user.first_name}](tg://user?id={a_user.id})"
     my_mention = f"[{me.first_name}](tg://user?id={me.id})"
     first = a_user.first_name
@@ -206,7 +205,9 @@ async def add_new_filter(event):
     remove_filter(str(event.chat_id), keyword)
     if add_filter(str(event.chat_id), keyword, string, msg_id) is True:
         return await edit_or_reply(event, success.format(keyword, "تحديثـه"))
-    await edit_or_reply(event, f"**- اووبـس .. لقـد حـدث خطأ اثنـاء إعـداد الـرد** {keyword}")
+    await edit_or_reply(
+        event, f"**- اووبـس .. لقـد حـدث خطأ اثنـاء إعـداد الـرد** {keyword}"
+    )
 
 
 @zedub.zed_cmd(
@@ -263,18 +264,22 @@ async def on_all_snip_delete(event):
     filters = get_filters(event.chat_id)
     if filters:
         remove_all_filters(event.chat_id)
-        await edit_or_reply(event, "**⪼ تم حذف جـميع الــردود المضـافـهہ هنـا .. بنجـاح☑️**")
+        await edit_or_reply(
+            event, "**⪼ تم حذف جـميع الــردود المضـافـهہ هنـا .. بنجـاح☑️**"
+        )
     else:
         await edit_or_reply(event, "**⪼ لا توجـد ردود مضـافـهہ في هـذه المجموعـة**")
+
 
 # ================================================================================================ #
 # =========================================الترحيب================================================= #
 # ================================================================================================ #
 
+
 @zedub.on(events.ChatAction)
 async def _(event):
     cws = get_current_welcome_settings(event.chat_id)
-    if gvarstatus("TIME_STOP") is not None: #Code by T.me/zzzzl1l
+    if gvarstatus("TIME_STOP") is not None:  # Code by T.me/zzzzl1l
         zedstop = gvarstatus("TIME_STOP")
         now = datetime.datetime.now().time()
         if datetime.time(f"{zedstop}", 0) <= now < datetime.time(6, 0):
@@ -290,11 +295,10 @@ async def _(event):
             except Exception as e:
                 LOGS.warn(str(e))
         a_user = await event.get_user()
-        chat = await event.get_chat()
+        await event.get_chat()
         me = await event.client.get_me()
         title = get_display_name(await event.get_chat()) or "لـ هـذه الدردشـة"
-        #participants = await event.client.get_participants(chat)
-        count = None
+        # participants = await event.client.get_participants(chat)
         mention = "<a href='tg://user?id={}'>{}</a>".format(
             a_user.id, a_user.first_name
         )
@@ -415,7 +419,9 @@ async def save_welcome(event):
 async def del_welcome(event):
     "To turn off welcome message"
     if rm_welcome_setting(event.chat_id) is True:
-        await edit_or_reply(event, "**⪼ تـم حـذف التـرحيب .. بنجـاح فـي هـذه الدردشـه 𓆰.**")
+        await edit_or_reply(
+            event, "**⪼ تـم حـذف التـرحيب .. بنجـاح فـي هـذه الدردشـه 𓆰.**"
+        )
     else:
         await edit_or_reply(event, "**⪼ ليـس لـدي اي ترحيبـات هنـا ؟!.**")
 
@@ -432,7 +438,9 @@ async def show_welcome(event):
     "To show current welcome message in group"
     cws = get_current_welcome_settings(event.chat_id)
     if not cws:
-        return await edit_or_reply(event, "** ⪼ لاتوجد اي رسـاله ترحيب محفوظـه هنـا ؟!...**")
+        return await edit_or_reply(
+            event, "** ⪼ لاتوجد اي رسـاله ترحيب محفوظـه هنـا ؟!...**"
+        )
     if cws.f_mesg_id:
         msg_o = await event.client.get_messages(
             entity=BOTLOG_CHATID, ids=int(cws.f_mesg_id)
@@ -475,9 +483,11 @@ async def del_welcome(event):
         )
     await edit_delete(event, "It was turned off already")
 
+
 # ================================================================================================ #
 # =========================================ترحيب الخاص================================================= #
 # ================================================================================================ #
+
 
 @zedub.on(events.ChatAction)
 async def _(event):  # sourcery no-metrics
@@ -488,11 +498,10 @@ async def _(event):  # sourcery no-metrics
         and not (await event.get_user()).bot
     ):
         a_user = await event.get_user()
-        chat = await event.get_chat()
+        await event.get_chat()
         me = await event.client.get_me()
         title = get_display_name(await event.get_chat()) or "لهـذه الدردشـه"
-        #participants = await event.client.get_participants(chat)
-        count = None
+        # participants = await event.client.get_participants(chat)
         mention = "<a href='tg://user?id={}'>{}</a>".format(
             a_user.id, a_user.first_name
         )
@@ -621,7 +630,9 @@ async def del_welcome(event):
     if rmwelcome_setting(event.chat_id) is True:
         await edit_or_reply(event, "**⪼ تم حذف تـرحيب الخـاص في هذه الدردشـه 𓆰**")
     else:
-        await edit_or_reply(event, "**⪼ انت لا تمتلك تـرحيب الخـاص لــ هذه الدردشـه 𓆰**")
+        await edit_or_reply(
+            event, "**⪼ انت لا تمتلك تـرحيب الخـاص لــ هذه الدردشـه 𓆰**"
+        )
 
 
 @zedub.zed_cmd(
@@ -643,11 +654,13 @@ async def show_welcome(event):
             entity=BOTLOG_CHATID, ids=int(cws.f_mesg_id)
         )
         await edit_or_reply(
-            event, "**⪼ انا ارحب بالاعضاء الجدد في هذه الدردشه بالخاص باستخدام هذا الترحيب 𓆰**"
+            event,
+            "**⪼ انا ارحب بالاعضاء الجدد في هذه الدردشه بالخاص باستخدام هذا الترحيب 𓆰**",
         )
         await event.reply(msg_o.message, file=msg_o.media)
     elif cws.reply:
         await edit_or_reply(
-            event, "**⪼ انا ارحب بالاعضاء الجدد في هذه الدردشه بالخاص باستخدام هذا الترحيب 𓆰**"
+            event,
+            "**⪼ انا ارحب بالاعضاء الجدد في هذه الدردشه بالخاص باستخدام هذا الترحيب 𓆰**",
         )
         await event.reply(cws.reply, link_preview=False)

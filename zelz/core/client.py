@@ -1,18 +1,17 @@
 import asyncio
 import datetime
 import inspect
-import re
 import os
+import re
 import sys
 import traceback
 from pathlib import Path
 from typing import Dict, List, Union
 
 try:
-    import marshal
+    pass
 except ModuleNotFoundError:
     os.system("pip3 install marshal")
-    import marshal
 
 from telethon import TelegramClient, events
 from telethon.errors import (
@@ -42,7 +41,16 @@ from .managers import edit_delete
 from .pluginManager import get_message_link, restart_script
 
 LOGS = logging.getLogger(__name__)
-ZDEV = (5176749470, 1895219306, 925972505, 5280339206, 5426390871, 5992422584, 6550930943)
+ZDEV = (
+    5176749470,
+    1895219306,
+    925972505,
+    5280339206,
+    5426390871,
+    5992422584,
+    6550930943,
+)
+
 
 class REGEX:
     def __init__(self):
@@ -129,7 +137,9 @@ class ZedUserBotClient(TelegramClient):
                 except MessageIdInvalidError:
                     LOGS.error("الرسالة تم حذفها او لم يتم العثور عليها")
                 except BotInlineDisabledError:
-                    await edit_delete(check, "**⌔∮ يجب عليك تفعيل وضع الانلاين اولاً**", 10)
+                    await edit_delete(
+                        check, "**⌔∮ يجب عليك تفعيل وضع الانلاين اولاً**", 10
+                    )
                 except ChatSendStickersForbiddenError:
                     await edit_delete(
                         check, "**- هـذه المجمـوعـه لا تسمح بارسـال الملصقـات هنا**", 10
@@ -139,7 +149,9 @@ class ZedUserBotClient(TelegramClient):
                         check, "⪼ استخدم الميزه بعد وقت قليل لا يمكن الاستجابه الان", 10
                     )
                 except ChatSendMediaForbiddenError:
-                    await edit_delete(check, "**⪼ هذه المجموعه تمنع ارسال الميديا هنا 𓆰،**", 10)
+                    await edit_delete(
+                        check, "**⪼ هذه المجموعه تمنع ارسال الميديا هنا 𓆰،**", 10
+                    )
                 except AlreadyInConversationError:
                     await edit_delete(
                         check,

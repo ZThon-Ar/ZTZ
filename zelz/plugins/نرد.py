@@ -1,27 +1,9 @@
 """ ©ZED™ - @ZlZZl77 """
 
-import asyncio
-import random
-import pyfiglet
 from telethon.tl.types import InputMediaDice
-from time import sleep
-from datetime import datetime
-from telethon import Button, events ,types, version
-from telethon.events import CallbackQuery, InlineQuery
-from telethon.utils import get_display_name
-from telethon.errors import QueryIdInvalidError
-from telethon.tl.types import InputMessagesFilterDocument
-from . import StartTime, zedub, zedversion
-from ..Config import Config
-from ..core import check_owner, pool
-from ..core.logger import logging
-from collections import deque
-from random import choice
-from . import ALIVE_NAME
-from ..helpers import fonts as emojify
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import reply_id, get_user_from_event, _format
-from . import deEmojify
+
+from . import zedub
+
 # EMOJI CONSTANTS
 DART_E_MOJI = "🎯"
 DICE_E_MOJI = "🎲"

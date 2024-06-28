@@ -4,17 +4,16 @@
 # This file is a part of < https://github.com/Zed-Thon/ZelZal/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/Zed-Thon/ZelZal/blob/main/LICENSE/>.
-#حقوق زد ثـون ومتعوب عليها .. تخمط اذكر المصدر لو اهينك
+# حقوق زد ثـون ومتعوب عليها .. تخمط اذكر المصدر لو اهينك
 
-import random
 
-from . import zedub
-from ..core.managers import edit_or_reply
-from ..helpers.utils import reply_id as rd 
-from ..helpers import get_user_from_event
 from zedthon.malath.theem import *
 
+from ..core.managers import edit_or_reply
+from ..helpers.utils import reply_id as rd
 from . import *
+from . import zedub
+
 
 @zedub.zed_cmd(pattern="ث1$")
 async def stsTHMAT(zelzal):
@@ -23,7 +22,9 @@ async def stsTHMAT(zelzal):
     zel = await rd(zelzal)
     if sts_attheme:
         zelzal_c = f"**{THMAT}**\n"
-        await zelzal.client.send_file(zelzal.chat_id, sts_attheme, caption=zelzal_c, reply_to=zel)
+        await zelzal.client.send_file(
+            zelzal.chat_id, sts_attheme, caption=zelzal_c, reply_to=zel
+        )
 
 
 @zedub.zed_cmd(pattern="ث2$")
@@ -33,7 +34,9 @@ async def stsTHMAT(lon):
     lonid = await rd(lon)
     if sts_attheme2:
         zed_c = f"**{THMAT}**\n"
-        await lon.client.send_file(lon.chat_id, sts_attheme2, caption=zed_c, reply_to=lonid)
+        await lon.client.send_file(
+            lon.chat_id, sts_attheme2, caption=zed_c, reply_to=lonid
+        )
 
 
 @zedub.zed_cmd(pattern="ث3$")
@@ -92,8 +95,8 @@ async def stsTHMAT(zed):
         await zed.client.send_file(
             zed.chat_id, sts_attheme7, caption=tumc, reply_to=reply_to_id
         )
-        
-        
+
+
 @zedub.zed_cmd(pattern="ث8$")
 async def stsTHMAT(zed):
     if zed.fwd_from:
@@ -104,7 +107,8 @@ async def stsTHMAT(zed):
         await zed.client.send_file(
             zed.chat_id, sts_attheme8, caption=tumc, reply_to=reply_to_id
         )
-        
+
+
 @zedub.zed_cmd(pattern="ث9$")
 async def stsTHMAT(zed):
     if zed.fwd_from:
@@ -116,6 +120,7 @@ async def stsTHMAT(zed):
             zed.chat_id, sts_attheme9, caption=tumc, reply_to=reply_to_id
         )
 
+
 @zedub.zed_cmd(pattern="ث10$")
 async def stsTHMAT(zed):
     if zed.fwd_from:
@@ -126,7 +131,8 @@ async def stsTHMAT(zed):
         await zed.client.send_file(
             zed.chat_id, sts_attheme10, caption=tumc, reply_to=reply_to_id
         )
-        
+
+
 @zedub.zed_cmd(pattern="ث11$")
 async def stsTHMAT(zed):
     if zed.fwd_from:
@@ -137,7 +143,8 @@ async def stsTHMAT(zed):
         await zed.client.send_file(
             zed.chat_id, sts_attheme11, caption=tumc, reply_to=reply_to_id
         )
-        
+
+
 @zedub.zed_cmd(pattern="ث12$")
 async def stsTHMAT(zed):
     if zed.fwd_from:
@@ -150,7 +157,6 @@ async def stsTHMAT(zed):
         )
 
 
-
 @zedub.zed_cmd(pattern="ن1$")
 async def stsfanan(zelzal):
     if zelzal.fwd_from:
@@ -161,7 +167,9 @@ async def stsfanan(zelzal):
         zelzal_c += f"•━─━─━─━─𝙕𝞝𝘿─━─━─━─━•\n\n"
         zelzal_c += f"**⪼ ثيـم علـم العـراق 🇮🇶♥️**\n"
         zelzal_c += f"**⪼ لـ تحميـل الثيـم ارســل ↫** `.ث1`"
-        await zelzal.client.send_file(zelzal.chat_id, sts_fanan, caption=zelzal_c, reply_to=zel)
+        await zelzal.client.send_file(
+            zelzal.chat_id, sts_fanan, caption=zelzal_c, reply_to=zel
+        )
 
 
 @zedub.zed_cmd(pattern="ن2$")
@@ -174,7 +182,9 @@ async def stsfanan(lon):
         zed_c += f"•━─━─━─━─𝙕𝞝𝘿─━─━─━─━•\n\n"
         zed_c += f"**⪼ ثيم البشير شو HD غير مضر للعيون ❤️ ...**\n"
         zed_c += f"**⪼ لـ تحميـل الثيـم ارســل ↫** `.ث2`"
-        await lon.client.send_file(lon.chat_id, sts_fanan2, caption=zed_c, reply_to=lonid)
+        await lon.client.send_file(
+            lon.chat_id, sts_fanan2, caption=zed_c, reply_to=lonid
+        )
 
 
 @zedub.zed_cmd(pattern="ن3$")
@@ -228,7 +238,9 @@ async def stsfanan(zelzalo):
     if sts_fanan6:
         tumc = f"**{FANAN}**\n"
         tumc += f"•━─━─━─━─𝙕𝞝𝘿─━─━─━─━•\n\n"
-        tumc += f"**⪼ ثيم للفنانة (بيلي اليش) الثيم ازرق فاتح وأبيض غير مضر للعيون🧸💙**\n"
+        tumc += (
+            f"**⪼ ثيم للفنانة (بيلي اليش) الثيم ازرق فاتح وأبيض غير مضر للعيون🧸💙**\n"
+        )
         tumc += f"**⪼ لـ تحميـل الثيـم ارســل ↫** `.ث6`"
         await zelzalo.client.send_file(
             zelzalo.chat_id, sts_fanan6, caption=tumc, reply_to=reply_to_id
@@ -248,8 +260,8 @@ async def stsfanan(zed):
         await zed.client.send_file(
             zed.chat_id, sts_fanan7, caption=tumc, reply_to=reply_to_id
         )
-        
-        
+
+
 @zedub.zed_cmd(pattern="ن8$")
 async def stsfanan(zed):
     if zed.fwd_from:
@@ -263,7 +275,8 @@ async def stsfanan(zed):
         await zed.client.send_file(
             zed.chat_id, sts_fanan8, caption=tumc, reply_to=reply_to_id
         )
-        
+
+
 @zedub.zed_cmd(pattern="ن9$")
 async def stsfanan(zed):
     if zed.fwd_from:
@@ -278,6 +291,7 @@ async def stsfanan(zed):
             zed.chat_id, sts_fanan9, caption=tumc, reply_to=reply_to_id
         )
 
+
 @zedub.zed_cmd(pattern="ن10$")
 async def stsfanan(zed):
     if zed.fwd_from:
@@ -291,7 +305,8 @@ async def stsfanan(zed):
         await zed.client.send_file(
             zed.chat_id, sts_fanan10, caption=tumc, reply_to=reply_to_id
         )
-        
+
+
 @zedub.zed_cmd(pattern="ن11$")
 async def stsfanan(zed):
     if zed.fwd_from:
@@ -305,7 +320,8 @@ async def stsfanan(zed):
         await zed.client.send_file(
             zed.chat_id, sts_fanan11, caption=tumc, reply_to=reply_to_id
         )
-        
+
+
 @zedub.zed_cmd(pattern="ن12$")
 async def stsfanan(zed):
     if zed.fwd_from:
@@ -324,6 +340,7 @@ async def stsfanan(zed):
 @zedub.zed_cmd(pattern="ثيمات")
 async def zed(zelzal):
     await edit_or_reply(zelzal, ZL)
+
 
 @zedub.zed_cmd(pattern="الثيمات")
 async def zed(zelzal):

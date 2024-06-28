@@ -2,12 +2,11 @@ import re
 
 from telethon import Button, events
 from telethon.events import CallbackQuery
-from ..core import check_owner, pool
-
-from . import zedub
 
 from ..Config import Config
-from . import mention
+from ..core import check_owner
+from . import mention, zedub
+
 HELP = f"**🧑🏻‍💻┊مـࢪحبـاً عـزيـزي {mention}**\n**🛂┊في قائمـة المسـاعـده والشـروحـات\n🛃┊من هنـا يمكنـك ايجـاد شـرح لكـل اوامـر السـورس**\n\n[ᯓ 𝗭𝗧𝗵𝗼𝗻 𝗨𝘀𝗲𝗿𝗯𝗼𝘁 ♥️](https://t.me/ZThon)\n\n"
 
 
@@ -117,9 +116,11 @@ async def zed_help(event):
                 ],
                 [Button.inline("رجوع", data="ZEDHELP")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zzcall")))
 @check_owner
@@ -152,7 +153,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zmusic")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zzmusic")))
 @check_owner
@@ -181,7 +184,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zmusic")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"superzzz")))
 @check_owner
@@ -197,7 +202,9 @@ async def _(event):
             ],
             [Button.inline("رجوع", data="superzzz")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"spamzzz")))
 @check_owner
@@ -232,7 +239,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="superzzz")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"superrzz")))
 @check_owner
@@ -275,7 +284,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="superzzz")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pointzzz")))
 @check_owner
@@ -340,7 +351,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="ZEDHELP")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zchatgpt")))
 @check_owner
@@ -365,7 +378,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="ZEDHELP")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 ############ البوت ############
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"botvr")))
@@ -405,7 +420,8 @@ async def _(event):
                 ],
                 [Button.inline("رجــوع", data="ZEDHELP")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -427,7 +443,9 @@ async def _(event):
             [Button.inline("تاريـخ التنصيب", data="datzzz")],
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"syszzz")))
 @check_owner
@@ -451,7 +469,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="syszed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"rmzzz")))
 @check_owner
@@ -469,7 +489,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="syszed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"fszzz")))
 @check_owner
@@ -487,7 +509,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="syszed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"envzzz")))
 @check_owner
@@ -505,7 +529,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="syszed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"datzzz")))
 @check_owner
@@ -524,7 +550,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="syszed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"updatevr")))
 @check_owner
@@ -549,7 +577,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"resitvr")))
 @check_owner
@@ -570,7 +600,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"stopvr")))
 @check_owner
@@ -592,7 +624,9 @@ https://t.me/zzzlvv/62
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"alivzed")))
 @check_owner
@@ -610,7 +644,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"sleep")))
 @check_owner
@@ -632,7 +668,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"netzed")))
 @check_owner
@@ -651,7 +689,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"sourcevr")))
 @check_owner
@@ -669,7 +709,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zedvr")))
 @check_owner
@@ -687,7 +729,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"ethaavr")))
 @check_owner
@@ -705,7 +749,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"devvr")))
 @check_owner
@@ -761,7 +807,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"groupvr")))
 @check_owner
@@ -799,7 +847,8 @@ async def _(event):
                 ],
                 [Button.inline("رجــوع", data="ZEDHELP")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -839,7 +888,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"group4vr")))
 @check_owner
@@ -881,7 +932,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"group5vr")))
 @check_owner
@@ -924,7 +977,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"group1vr")))
 @check_owner
@@ -969,7 +1024,9 @@ async def _(event):
             [Button.inline("تقييـد المحتـوى", data="lolzed")],
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"botveiw")))
 @check_owner
@@ -987,7 +1044,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"botlock")))
 @check_owner
@@ -1006,7 +1065,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"addlock")))
 @check_owner
@@ -1025,7 +1086,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"golock")))
 @check_owner
@@ -1044,7 +1107,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"medlock")))
 @check_owner
@@ -1063,7 +1128,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"edmdlock")))
 @check_owner
@@ -1082,7 +1149,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"urlock")))
 @check_owner
@@ -1101,7 +1170,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"userlock")))
 @check_owner
@@ -1120,7 +1191,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"forlock")))
 @check_owner
@@ -1139,7 +1212,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"inilock")))
 @check_owner
@@ -1158,7 +1233,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"farslock")))
 @check_owner
@@ -1177,7 +1254,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"fuklock")))
 @check_owner
@@ -1196,7 +1275,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"premlock")))
 @check_owner
@@ -1215,7 +1296,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zerolock")))
 @check_owner
@@ -1235,7 +1318,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"alllock")))
 @check_owner
@@ -1254,7 +1339,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"setelock")))
 @check_owner
@@ -1272,7 +1359,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"lolzed")))
 @check_owner
@@ -1295,7 +1384,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="botvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"group2vr")))
 @check_owner
@@ -1335,7 +1426,9 @@ async def _(event):
             [Button.inline("مسح المحظورين", data="delbans")],
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"urlveiw")))
 @check_owner
@@ -1353,7 +1446,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"tagvr")))
 @check_owner
@@ -1377,7 +1472,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"addmnvr")))
 @check_owner
@@ -1396,7 +1493,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"creatorvr")))
 @check_owner
@@ -1415,7 +1514,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"msgvr")))
 @check_owner
@@ -1436,7 +1537,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"msgvr")))
 @check_owner
@@ -1461,7 +1564,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"delmsgvr")))
 @check_owner
@@ -1493,7 +1598,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"iundlt")))
 @check_owner
@@ -1513,7 +1620,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"infoovr")))
 @check_owner
@@ -1531,7 +1640,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"memver")))
 @check_owner
@@ -1550,7 +1661,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"creatorrvr")))
 @check_owner
@@ -1569,7 +1682,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"botssvr")))
 @check_owner
@@ -1588,7 +1703,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"photoadd")))
 @check_owner
@@ -1609,7 +1726,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pinvr")))
 @check_owner
@@ -1630,7 +1749,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zomby")))
 @check_owner
@@ -1650,7 +1771,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"delbans")))
 @check_owner
@@ -1668,7 +1791,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group2vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"group3vr")))
 @check_owner
@@ -1692,7 +1817,9 @@ async def _(event):
             [Button.inline("مسح المحظورين", data="dellbans")],
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"mutevr")))
 @check_owner
@@ -1725,7 +1852,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group3vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"banvr")))
 @check_owner
@@ -1759,7 +1888,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group3vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"kickvr")))
 @check_owner
@@ -1778,7 +1909,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group3vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"tkkkvr")))
 @check_owner
@@ -1797,7 +1930,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group3vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"nospam")))
 @check_owner
@@ -1819,7 +1954,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"noway")))
 @check_owner
@@ -1841,7 +1978,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"group0vr")))
 @check_owner
@@ -1865,7 +2004,9 @@ async def _(event):
             [Button.inline("مسح المحظورين", data="dellbans")],
             [Button.inline("رجوع", data="groupvr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"addvr")))
 @check_owner
@@ -1896,7 +2037,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group0vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zerovr")))
 @check_owner
@@ -1917,7 +2060,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group0vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"banall")))
 @check_owner
@@ -1938,7 +2083,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group0vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"kickall")))
 @check_owner
@@ -1959,7 +2106,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group0vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"mutall")))
 @check_owner
@@ -1980,7 +2129,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group0vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"byby")))
 @check_owner
@@ -2001,7 +2152,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group3vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"banbot")))
 @check_owner
@@ -2021,7 +2174,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group3vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zoomby")))
 @check_owner
@@ -2041,7 +2196,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group3vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"dellbans")))
 @check_owner
@@ -2059,7 +2216,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="group0vr")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 ############ الفارات ############
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"varszed")))
@@ -2078,7 +2237,8 @@ async def _(event):
                 [Button.inline("فارات السورس", data="sourcevar")],
                 [Button.inline("رجــوع", data="ZEDHELP")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -2109,7 +2269,9 @@ async def _(event):
             [Button.inline("رجوع", data="varszed")],
             [Button.inline("رجــوع", data="ZEDHELP")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"contrytime")))
 @check_owner
@@ -2123,7 +2285,9 @@ async def _(event):
             [Button.inline("رجوع", data="namevar")],
             [Button.inline("رجــوع", data="ZEDHELP")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"symnamvar")))
 @check_owner
@@ -2141,7 +2305,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"phovarlok")))
 @check_owner
@@ -2159,7 +2325,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"biolokvar")))
 @check_owner
@@ -2177,7 +2345,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"timevar")))
 @check_owner
@@ -2209,7 +2379,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"nameprvr")))
 @check_owner
@@ -2227,7 +2399,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pmvars")))
 @check_owner
@@ -2245,7 +2419,9 @@ async def _(event):
             [Button.inline("رجوع", data="varszed")],
             [Button.inline("رجــوع", data="ZEDHELP")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"warnvars")))
 @check_owner
@@ -2263,7 +2439,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="pmvars")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pmvarkish")))
 @check_owner
@@ -2282,7 +2460,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="pmvars")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"picpmvar")))
 @check_owner
@@ -2300,7 +2480,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="pmvars")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"alivevar")))
 @check_owner
@@ -2316,7 +2498,9 @@ async def _(event):
             [Button.inline("رجوع", data="varszed")],
             [Button.inline("رجــوع", data="ZEDHELP")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"picvars")))
 @check_owner
@@ -2334,7 +2518,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="alivevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"kleshalive")))
 @check_owner
@@ -2352,7 +2538,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="alivevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"rmzalive")))
 @check_owner
@@ -2370,7 +2558,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="alivevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"sourcevar")))
 @check_owner
@@ -2392,9 +2582,11 @@ async def zed_help(event):
                 ],
                 [Button.inline("رجــوع", data="varszed")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"katmvar")))
 @check_owner
@@ -2412,7 +2604,8 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="sourcevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
 
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"startbotvar")))
@@ -2431,7 +2624,8 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="sourcevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
 
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"rmsavar")))
@@ -2450,7 +2644,8 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="sourcevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
 
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"enoanvar")))
@@ -2469,7 +2664,8 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="sourcevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
 
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"katvar")))
@@ -2488,7 +2684,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="sourcevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"msrvar")))
 @check_owner
@@ -2506,7 +2704,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"yemenvar")))
 @check_owner
@@ -2524,7 +2724,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"syriavar")))
 @check_owner
@@ -2542,7 +2744,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"timavar")))
 @check_owner
@@ -2581,7 +2785,9 @@ https://t.me/ZED_Thon/148""",
         buttons=[
             [Button.inline("رجوع", data="namevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pointvar")))
 @check_owner
@@ -2599,7 +2805,8 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="sourcevar")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
 
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"zdownload")))
@@ -2659,7 +2866,8 @@ async def zed_help(event):
                 ],
                 [Button.inline("رجوع", data="ZEDHELP")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -2684,7 +2892,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"vedzed")))
 @check_owner
@@ -2705,7 +2915,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"youini")))
 @check_owner
@@ -2737,7 +2949,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"downsou")))
 @check_owner
@@ -2756,7 +2970,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"downved")))
 @check_owner
@@ -2775,7 +2991,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"shazam")))
 @check_owner
@@ -2795,7 +3013,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"giff")))
 @check_owner
@@ -2813,7 +3033,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"stickkers")))
 @check_owner
@@ -2837,7 +3059,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pictures")))
 @check_owner
@@ -2861,7 +3085,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"youtubb")))
 @check_owner
@@ -2883,7 +3109,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"soundcloud")))
 @check_owner
@@ -2902,7 +3130,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"insta")))
 @check_owner
@@ -2923,7 +3153,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pentrist")))
 @check_owner
@@ -2941,7 +3173,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"likee")))
 @check_owner
@@ -2960,7 +3194,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"tiktok")))
 @check_owner
@@ -2979,7 +3215,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"facebook")))
 @check_owner
@@ -2997,7 +3235,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"tweter")))
 @check_owner
@@ -3016,7 +3256,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"snapchat")))
 @check_owner
@@ -3035,7 +3277,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"bookzzz")))
 @check_owner
@@ -3053,7 +3297,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"savzzz")))
 @check_owner
@@ -3071,7 +3317,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"storyzzz")))
 @check_owner
@@ -3089,7 +3337,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"telech")))
 @check_owner
@@ -3113,7 +3363,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"telecg")))
 @check_owner
@@ -3136,7 +3388,8 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="zdownload")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
 
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"funzed")))
@@ -3161,7 +3414,8 @@ async def _(event):
                 ],
                 [Button.inline("رجــوع", data="ZEDHELP")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -3193,7 +3447,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="funzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"fun2zed")))
 @check_owner
@@ -3235,7 +3491,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="funzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"fun3zed")))
 @check_owner
@@ -3283,7 +3541,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="funzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"fun4zed")))
 @check_owner
@@ -3333,7 +3593,8 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="funzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
 
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"acccount")))
@@ -3366,7 +3627,8 @@ async def zed_help(event):
                     Button.inline("التالـي", data="nextacc"),
                 ],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -3397,7 +3659,9 @@ async def zed_help(event):
                 Button.inline("التالـي", data="next2acc"),
             ],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"next2acc")))
 @check_owner
@@ -3420,7 +3684,9 @@ async def zed_help(event):
                 Button.inline("رجـوع", data="ZEDHELP"),
             ],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"profcmd")))
 @check_owner
@@ -3447,7 +3713,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nextacc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"echozed")))
 @check_owner
@@ -3473,7 +3741,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="next2acc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"enthalzed")))
 @check_owner
@@ -3494,7 +3764,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="next2acc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"gozzz")))
 @check_owner
@@ -3520,7 +3792,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="next2acc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"banzzz")))
 @check_owner
@@ -3538,7 +3812,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="next2acc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"delzzz")))
 @check_owner
@@ -3556,7 +3832,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="next2acc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"biome")))
 @check_owner
@@ -3582,7 +3860,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"namme")))
 @check_owner
@@ -3609,7 +3889,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"picme")))
 @check_owner
@@ -3635,7 +3917,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"channelme")))
 @check_owner
@@ -3659,7 +3943,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"groubme")))
 @check_owner
@@ -3683,7 +3969,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pmme")))
 @check_owner
@@ -3699,7 +3987,9 @@ async def _(event):
             ],
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pmcmd")))
 @check_owner
@@ -3748,7 +4038,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pmvar")))
 @check_owner
@@ -3779,7 +4071,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="acccount")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"infome")))
 @check_owner
@@ -3797,7 +4091,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nextacc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"whome")))
 @check_owner
@@ -3860,7 +4156,9 @@ https://t.me/ZED_Thon/293
         buttons=[
             [Button.inline("رجوع", data="nextacc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"logme")))
 @check_owner
@@ -3888,7 +4186,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nextacc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"mutme")))
 @check_owner
@@ -3911,7 +4211,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nextacc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"banme")))
 @check_owner
@@ -3946,7 +4248,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nextacc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"whonam")))
 @check_owner
@@ -3968,7 +4272,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nextacc")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"extras")))
 @check_owner
@@ -3993,7 +4299,8 @@ async def zed_help(event):
                 ],
                 [Button.inline("رجوع", data="ZEDHELP")],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -4040,7 +4347,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="extras")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"story")))
 @check_owner
@@ -4081,7 +4390,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="extras")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"avatar")))
 @check_owner
@@ -4125,7 +4436,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="extras")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"stickerrs")))
 @check_owner
@@ -4157,7 +4470,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="extras")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"spamzzz")))
 @check_owner
@@ -4190,7 +4505,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="extras")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"toolzed")))
 @check_owner
@@ -4220,7 +4537,8 @@ async def zed_help(event):
                     Button.inline("التالـي", data="nexttools"),
                 ],
             ],
-        link_preview=False)
+            link_preview=False,
+        )
     except Exception:
         await event.answer(zelzal, cache_time=0, alert=True)
 
@@ -4251,7 +4569,9 @@ async def zed_help(event):
             ],
             [Button.inline("رجوع", data="toolzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"thatia")))
 @check_owner
@@ -4284,7 +4604,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="toolzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"scanner")))
 @check_owner
@@ -4307,7 +4629,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"calczed")))
 @check_owner
@@ -4328,7 +4652,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"taks")))
 @check_owner
@@ -4349,7 +4675,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"transzzz")))
 @check_owner
@@ -4375,7 +4703,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"creatzzz")))
 @check_owner
@@ -4402,7 +4732,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"leavzzz")))
 @check_owner
@@ -4425,7 +4757,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"scinczzz")))
 @check_owner
@@ -4454,7 +4788,9 @@ https://t.me/ZED_Thon/293
         buttons=[
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"urltools")))
 @check_owner
@@ -4477,7 +4813,9 @@ async def zed_help(event):
             ],
             [Button.inline("رجوع", data="nexttools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"shorturl")))
 @check_owner
@@ -4502,7 +4840,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="urltools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"screenzed")))
 @check_owner
@@ -4521,7 +4861,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="urltools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"viewzzz")))
 @check_owner
@@ -4539,7 +4881,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="urltools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"dnszzz")))
 @check_owner
@@ -4560,7 +4904,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="urltools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"hideurl")))
 @check_owner
@@ -4579,7 +4925,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="urltools")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"subszed")))
 @check_owner
@@ -4630,7 +4978,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="toolzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"huntzed")))
 @check_owner
@@ -4700,7 +5050,9 @@ __________________________________________
         buttons=[
             [Button.inline("رجوع", data="toolzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"pointzed")))
 @check_owner
@@ -4713,7 +5065,9 @@ async def zed_help(event):
             ],
             [Button.inline("رجوع", data="toolzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"wadzed")))
 @check_owner
@@ -4752,7 +5106,9 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="pointzed")],
         ],
-    link_preview=False)
+        link_preview=False,
+    )
+
 
 @zedub.tgbot.on(CallbackQuery(data=re.compile(rb"nashzed")))
 @check_owner
@@ -4787,5 +5143,5 @@ async def _(event):
         buttons=[
             [Button.inline("رجوع", data="toolzed")],
         ],
-    link_preview=False)
-
+        link_preview=False,
+    )

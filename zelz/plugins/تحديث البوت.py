@@ -3,24 +3,21 @@ import contextlib
 import os
 import sys
 from asyncio.exceptions import CancelledError
-from time import sleep
 
 import heroku3
 import urllib3
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from . import HEROKU_APP, UPSTREAM_REPO_URL, zedub
-
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import _zedutils
 from ..sql_helper.global_collection import (
     add_to_collectionlist,
     del_keyword_collectionlist,
     get_collectionlist_items,
 )
+from . import HEROKU_APP, zedub
 
 plugin_category = "الادوات"
 cmdhd = Config.COMMAND_HAND_LER
@@ -86,17 +83,25 @@ async def update_bot(event, repo, ups_rem, ac_br):
     except GitCommandError:
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
-    sandy = await event.edit(f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**•⎆┊تم التحـديث ⎌ بنجـاح**\n**•⎆┊جـارِ إعـادة تشغيـل بـوت زدثــون ⎋ **\n**•⎆┊انتظـࢪ مـن 2 - 1 دقيقـه . . .📟**")
+    sandy = await event.edit(
+        f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**•⎆┊تم التحـديث ⎌ بنجـاح**\n**•⎆┊جـارِ إعـادة تشغيـل بـوت زدثــون ⎋ **\n**•⎆┊انتظـࢪ مـن 2 - 1 دقيقـه . . .📟**"
+    )
     await event.client.reload(sandy)
 
 
 async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
-        return await event.edit(f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_API_KEY اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!**", link_preview=False)
+        return await event.edit(
+            f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_API_KEY اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!**",
+            link_preview=False,
+        )
     heroku = heroku3.from_key(HEROKU_API_KEY)
     heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
-        await event.edit(f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_APP_NAME اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!**", link_preview=False)
+        await event.edit(
+            f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_APP_NAME اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!**",
+            link_preview=False,
+        )
         repo.__del__()
         return
     heroku_app = next(
@@ -109,7 +114,9 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             f"{txt}\n" "**- بيانات اعتماد هيروكو غير صالحة لتنصيب تحديث زدثــون**"
         )
         return repo.__del__()
-    sandy = await event.edit(f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n**✾╎جـارِ . . تنصـيب التحـديث الجـذري ⎌**\n**✾╎يُرجـى الانتظـار حتى تنتهـي العمليـة ⎋**\n**✾╎عـادة ما يستغـرق هـذا التحـديث مـن 5 - 4 دقائـق 📟**")
+    sandy = await event.edit(
+        f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n**✾╎جـارِ . . تنصـيب التحـديث الجـذري ⎌**\n**✾╎يُرجـى الانتظـار حتى تنتهـي العمليـة ⎋**\n**✾╎عـادة ما يستغـرق هـذا التحـديث مـن 5 - 4 دقائـق 📟**"
+    )
     try:
         ulist = get_collectionlist_items()
         for i in ulist:
@@ -147,11 +154,14 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     except Exception as error:
         await event.edit(f"{txt}\n**Here is the error log:**\n`{error}`")
         return repo.__del__()
-    await event.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n**•⎆┊بـوتك محـدث الـى آخـر إصـدار .. سابقـاً 🤷🏻‍♀\n•⎆┊لـذلك سـوف يتـم إعـادة التشغيـل فقـط 🌐 **")
+    await event.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n**•⎆┊بـوتك محـدث الـى آخـر إصـدار .. سابقـاً 🤷🏻‍♀\n•⎆┊لـذلك سـوف يتـم إعـادة التشغيـل فقـط 🌐 **"
+    )
     with contextlib.suppress(CancelledError):
         await event.client.disconnect()
         if HEROKU_APP is not None:
             HEROKU_APP.restart()
+
 
 @zedub.zed_cmd(
     pattern="تحديث البوت$",
@@ -160,14 +170,18 @@ async def upstream(event):
     if ENV:
         if HEROKU_API_KEY is None or HEROKU_APP_NAME is None:
             return await edit_or_reply(
-                event, "**- بيانات اعتماد تنصيبك غير صالحة لتنصيب تحديث زدثــون ❕❌**\n**- يجب تعييـن قيـم مربعـات الفارات التالية يدوياً من حساب هيروكـو 🛂**\n\n\n**- مربـع مفتـاح هيروكـو :** HEROKU_API_KEY\n**- مربـع اسـم التطبيـق :** HEROKU_APP_NAME"
+                event,
+                "**- بيانات اعتماد تنصيبك غير صالحة لتنصيب تحديث زدثــون ❕❌**\n**- يجب تعييـن قيـم مربعـات الفارات التالية يدوياً من حساب هيروكـو 🛂**\n\n\n**- مربـع مفتـاح هيروكـو :** HEROKU_API_KEY\n**- مربـع اسـم التطبيـق :** HEROKU_APP_NAME",
             )
     elif os.path.exists("config.py"):
         return await edit_delete(
             event,
             f"**- أعتقد أنك على الوضـع الذاتي ..**\n**- للتحديث الذاتي ارسـل الامـر** `{cmdhd}تحديث`",
         )
-    event = await edit_or_reply(event, f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⪼ يتم تنصيب التحديث  انتظر 🌐 ،**")
+    event = await edit_or_reply(
+        event,
+        f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⪼ يتم تنصيب التحديث  انتظر 🌐 ،**",
+    )
     off_repo = "https://github.com/ZThon-Ar/dev"
     os.chdir("/app")
     try:
@@ -192,27 +206,49 @@ async def upstream(event):
         repo.heads.master.checkout(True)
     with contextlib.suppress(BaseException):
         repo.create_remote("upstream", off_repo)
-    zzz1 = await event.edit(f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**")
+    zzz1 = await event.edit(
+        f"ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**"
+    )
     await asyncio.sleep(1)
-    zzz2 = await zzz1.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟷𝟶 ▬▭▭▭▭▭▭▭▭▭")
+    zzz2 = await zzz1.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟷𝟶 ▬▭▭▭▭▭▭▭▭▭"
+    )
     await asyncio.sleep(1)
-    zzz3 = await zzz2.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟸𝟶 ▬▬▭▭▭▭▭▭▭▭")
+    zzz3 = await zzz2.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟸𝟶 ▬▬▭▭▭▭▭▭▭▭"
+    )
     await asyncio.sleep(1)
-    zzz4 = await zzz3.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟹𝟶 ▬▬▬▭▭▭▭▭▭▭")
+    zzz4 = await zzz3.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟹𝟶 ▬▬▬▭▭▭▭▭▭▭"
+    )
     await asyncio.sleep(1)
-    zzz5 = await zzz4.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟺𝟶 ▬▬▬▬▭▭▭▭▭▭")
+    zzz5 = await zzz4.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟺𝟶 ▬▬▬▬▭▭▭▭▭▭"
+    )
     await asyncio.sleep(1)
-    zzz6 = await zzz5.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟻𝟶 ▬▬▬▬▬▭▭▭▭▭")
+    zzz6 = await zzz5.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟻𝟶 ▬▬▬▬▬▭▭▭▭▭"
+    )
     await asyncio.sleep(1)
-    zzz7 = await zzz6.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟼𝟶 ▬▬▬▬▬▬▭▭▭▭")
+    zzz7 = await zzz6.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟼𝟶 ▬▬▬▬▬▬▭▭▭▭"
+    )
     await asyncio.sleep(1)
-    zzz8 = await zzz7.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟽𝟶 ▬▬▬▬▬▬▬▭▭▭")
+    zzz8 = await zzz7.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟽𝟶 ▬▬▬▬▬▬▬▭▭▭"
+    )
     await asyncio.sleep(1)
-    zzz9 = await zzz8.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟾𝟶 ▬▬▬▬▬▬▬▬▭▭") 
+    zzz9 = await zzz8.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟾𝟶 ▬▬▬▬▬▬▬▬▭▭"
+    )
     await asyncio.sleep(1)
-    zzzz10 = await zzz9.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟿𝟶 ▬▬▬▬▬▬▬▬▬▭") 
+    zzzz10 = await zzz9.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟿𝟶 ▬▬▬▬▬▬▬▬▬▭"
+    )
     await asyncio.sleep(1)
-    zzzz11 = await zzzz10.edit("ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟷𝟶𝟶 ▬▬▬▬▬▬▬▬▬▬💯") 
+    zzzz11 = await zzzz10.edit(
+        "ᯓ 𝗦𝗢𝗨𝗥𝗖𝗘 𝗭𝗧𝗛𝗢𝗡 - تحـديث زدثــون\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐**\n\n%𝟷𝟶𝟶 ▬▬▬▬▬▬▬▬▬▬💯"
+    )
     ac_br = repo.active_branch.name
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)

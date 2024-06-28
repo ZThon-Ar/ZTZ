@@ -3,9 +3,8 @@ import json
 from bs4 import BeautifulSoup
 from requests import get
 
-from . import zedub
-
 from ..core.managers import edit_delete, edit_or_reply
+from . import zedub
 
 plugin_category = "آخرى"
 

@@ -1,19 +1,15 @@
-import asyncio
-import os
 import logging
+import os
 from pathlib import Path
-import time
-from datetime import datetime
 
-from telethon import events, functions, types
-from telethon.utils import get_peer_id
-from telethon.tl.types import InputPeerChannel, InputMessagesFilterDocument
+from telethon import functions
+from telethon.tl.types import InputMessagesFilterDocument, InputPeerChannel
 
-from . import zedub
 from ..Config import Config
+from ..helpers.utils import install_pip
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from ..helpers.utils import install_pip, _zedtools, _zedutils, _format, parse_pre, reply_id
-from ..utils import load_module, inst_done
+from ..utils import inst_done, load_module
+from . import zedub
 
 LOGS = logging.getLogger(__name__)
 h_type = True
@@ -28,17 +24,19 @@ if Config.ZELZAL_A:
         try:
             entity = await zedub.get_input_entity(Config.ZELZAL_A)
             if isinstance(entity, InputPeerChannel):
-                full_info = await zedub(functions.channels.GetFullChannelRequest(
-                    channel=entity
-                ))
+                full_info = await zedub(
+                    functions.channels.GetFullChannelRequest(channel=entity)
+                )
             zilzal = full_info.full_chat.id
-        except Exception as e:
+        except Exception:
             entity = await zedub.get_entity(Config.ZELZAL_A)
-            full_info = await zedub(functions.channels.GetFullChannelRequest(
-                channel=entity
-            ))
+            full_info = await zedub(
+                functions.channels.GetFullChannelRequest(channel=entity)
+            )
             zilzal = full_info.full_chat.id
-        documentss = await zedub.get_messages(zilzal, None, filter=InputMessagesFilterDocument)
+        documentss = await zedub.get_messages(
+            zilzal, None, filter=InputMessagesFilterDocument
+        )
         total = int(documentss.total)
         plgnm = 0
         for module in range(total):

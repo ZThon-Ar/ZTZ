@@ -243,9 +243,9 @@ def download_button(vid: str, body: bool = False):  # sourcery no-metrics
             if video.get("acodec") != "none":
                 bitrrate = int(video.get("abr", 0))
                 if bitrrate != 0:
-                    audio_dict[
-                        bitrrate
-                    ] = f"🎵 {bitrrate}Kbps ({humanbytes(fr_size) or 'N/A'})"
+                    audio_dict[bitrrate] = (
+                        f"🎵 {bitrrate}Kbps ({humanbytes(fr_size) or 'N/A'})"
+                    )
 
     video_btns = []
     for frmt in qual_list:
@@ -261,7 +261,11 @@ def download_button(vid: str, body: bool = False):  # sourcery no-metrics
             )
     buttons += sublists(video_btns, width=2)
     buttons += [
-        [Button.inline("⭐️ اعلى دقـه - 🎵 320Kbps - MP3", data=f"ytdl_download_{vid}_mp3_a")]
+        [
+            Button.inline(
+                "⭐️ اعلى دقـه - 🎵 320Kbps - MP3", data=f"ytdl_download_{vid}_mp3_a"
+            )
+        ]
     ]
     buttons += sublists(
         [

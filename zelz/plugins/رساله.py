@@ -1,13 +1,13 @@
-import os
 import asyncio
+import os
+
 from PIL import Image, ImageDraw, ImageFont
+
+from ..core.managers import edit_or_reply
 from . import zedub
 
-from ..core.managers import edit_delete, edit_or_reply
-from . import BOTLOG, BOTLOG_CHATID, mention
-from . import *
-
 plugin_category = "الترفيه"
+
 
 def text_set(text):
     lines = []
@@ -23,7 +23,6 @@ def text_set(text):
                 for z in range(1, k + 2):
                     lines.append(line[((z - 1) * 55) : (z * 55)])
     return lines[:25]
-    
 
 
 @zedub.zed_cmd(pattern="رساله ?(.*)")
@@ -49,7 +48,6 @@ async def writer(e):
     await e.reply(file=file)
     os.remove(file)
     await e.delete()
-
 
 
 @zedub.zed_cmd(pattern="^\:/$")
@@ -231,4 +229,3 @@ async def give(event):
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + " ")
     await asyncio.sleep(sleepValue)
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + lp)
-

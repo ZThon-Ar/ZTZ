@@ -1,76 +1,97 @@
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
 import asyncio
-import time
-import io
-import os
-import shutil
-import zipfile
 import csv
-import random
 import logging
-import glob
-import re
-
+import os
+import random
+import time
+from asyncio import sleep
 from datetime import datetime
 from math import sqrt
-from asyncio import sleep
-from asyncio.exceptions import TimeoutError
+
 from emoji import emojize
-
-from telethon.tl.custom import Dialog
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from telethon.tl.types import Channel, Chat, User
-
-from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
-from telethon import functions, types
+from telethon import functions
+from telethon.errors import (
+    ChannelInvalidError,
+    ChannelPrivateError,
+    ChannelPublicGroupNaError,
+    ChatAdminRequiredError,
+    FloodWaitError,
+    MessageNotModifiedError,
+    UserAdminInvalidError,
+)
+from telethon.errors.rpcerrorlist import (
+    UserAdminInvalidError,
+    UserAlreadyParticipantError,
+    UserNotMutualContactError,
+    UserPrivacyRestrictedError,
+)
 from telethon.sync import errors
-from telethon import events
 from telethon.tl import functions
-from telethon.tl.functions.channels import EditBannedRequest, GetFullChannelRequest, GetParticipantsRequest, EditAdminRequest, EditPhotoRequest, GetAdminedPublicChannelsRequest
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.functions.messages import GetFullChatRequest, GetHistoryRequest, ExportChatInviteRequest
-from telethon.errors import ChannelInvalidError, ChannelPrivateError, ChannelPublicGroupNaError, BadRequestError, ChatAdminRequiredError, FloodWaitError, MessageNotModifiedError, UserAdminInvalidError
-from telethon.errors.rpcerrorlist import YouBlockedUserError, UserAdminInvalidError, UserIdInvalidError, UserAlreadyParticipantError, UserNotMutualContactError, UserPrivacyRestrictedError, UsernameOccupiedError
+from telethon.tl.custom import Dialog
+from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.channels import GetFullChannelRequest as getchat
-from telethon.tl.functions.channels import InviteToChannelRequest, GetAdminedPublicChannelsRequest
-from telethon.tl.functions.phone import CreateGroupCallRequest as startvc
-from telethon.tl.functions.phone import DiscardGroupCallRequest as stopvc
+from telethon.tl.functions.channels import (
+    GetParticipantsRequest,
+    InviteToChannelRequest,
+)
+from telethon.tl.functions.messages import (
+    ExportChatInviteRequest,
+    GetFullChatRequest,
+    GetHistoryRequest,
+)
 from telethon.tl.functions.phone import GetGroupCallRequest as getvc
-from telethon.tl.functions.phone import InviteToGroupCallRequest as invitetovc
-from telethon.errors import ImageProcessFailedError, PhotoCropSizeSmallError
-from telethon.tl.types import ChatAdminRights, InputChatPhotoEmpty, MessageMediaPhoto, InputPeerUser
-from telethon.tl.types import ChannelParticipantsKicked, ChannelParticipantAdmin, ChatBannedRights, ChannelParticipantCreator, ChannelParticipantsAdmins, ChannelParticipantsBots, MessageActionChannelMigrateFrom, UserStatusEmpty, UserStatusLastMonth, UserStatusLastWeek, UserStatusOffline, UserStatusOnline, UserStatusRecently
-from telethon.tl.types import Channel, Chat, InputPhoto, User
-from telethon.utils import get_display_name, get_input_location, get_extension
-from os import remove
-from math import sqrt
-from prettytable import PrettyTable
-from emoji import emojize
-from pathlib import Path
-
-from . import zedub
+from telethon.tl.types import (
+    Channel,
+    ChannelParticipantAdmin,
+    ChannelParticipantCreator,
+    ChannelParticipantsAdmins,
+    ChannelParticipantsKicked,
+    Chat,
+    ChatBannedRights,
+    InputPeerUser,
+    MessageActionChannelMigrateFrom,
+    User,
+    UserStatusEmpty,
+    UserStatusLastMonth,
+    UserStatusLastWeek,
+    UserStatusOffline,
+    UserStatusOnline,
+    UserStatusRecently,
+)
+from telethon.utils import get_input_location
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import reply_id
-from ..helpers.utils import _format, get_user_from_event, reply_id
-from ..helpers import media_type
-from ..helpers.google_image_download import googleimagesdownload
-from ..helpers.tools import media_type
-from ..sql_helper.locks_sql import get_locks, is_locked, update_lock
-from ..utils import is_admin
-from . import progress
-from ..sql_helper import gban_sql_helper as gban_sql
-from ..sql_helper.mute_sql import is_muted, mute, unmute
-from ..sql_helper import no_log_pms_sql
-from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, mention
+from ..helpers.utils import reply_id
+from . import BOTLOG, BOTLOG_CHATID, zedub
 
 LOGS = logging.getLogger(__name__)
 plugin_category = "الادمن"
 
-BANNED_RIGHTS = ChatBannedRights(until_date=None, view_messages=True, send_messages=True, send_media=True, send_stickers=True, send_gifs=True, send_games=True, send_inline=True, embed_links=True)
-ZELZAL_RIGHTS = ChatBannedRights(until_date=None, view_messages=True, send_messages=True, send_media=True, send_stickers=True, send_gifs=True, send_games=True, send_inline=True, embed_links=True)
+BANNED_RIGHTS = ChatBannedRights(
+    until_date=None,
+    view_messages=True,
+    send_messages=True,
+    send_media=True,
+    send_stickers=True,
+    send_gifs=True,
+    send_games=True,
+    send_inline=True,
+    embed_links=True,
+)
+ZELZAL_RIGHTS = ChatBannedRights(
+    until_date=None,
+    view_messages=True,
+    send_messages=True,
+    send_media=True,
+    send_stickers=True,
+    send_gifs=True,
+    send_games=True,
+    send_inline=True,
+    embed_links=True,
+)
 UNBAN_RIGHTS = ChatBannedRights(
     until_date=None,
     send_messages=None,
@@ -95,14 +116,17 @@ TYPES = [
 ]
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
+
 async def get_call(event):
     mm = await event.client(getchat(event.chat_id))
     xx = await event.client(getvc(mm.full_chat.call))
     return xx.call
 
+
 def user_list(l, n):
     for i in range(0, len(l), n):
         yield l[i : i + n]
+
 
 def zipdir(dirName):
     filePaths = []
@@ -112,11 +136,14 @@ def zipdir(dirName):
             filePaths.append(filePath)
     return filePaths
 
+
 class LOG_CHATS:
     def __init__(self):
         self.RECENT_USER = None
         self.NEWPM = None
         self.COUNT = 0
+
+
 LOG_CHATS_ = LOG_CHATS()
 
 PP_TOO_SMOL = "**⎉╎الصورة صغيرة جدًا  📸** ."
@@ -422,7 +449,9 @@ async def admem(event):
             userin = InputPeerUser(user["id"], user["hash"])
             await event.client(InviteToChannelRequest(chat, [userin]))
             await asyncio.sleep(random.randrange(5, 7))
-            await xx.edit(f"**⎉╎تم إكمـال العمليـه جـارِ اضافـة** `{n}` **مـن الاعضـاء . .**")
+            await xx.edit(
+                f"**⎉╎تم إكمـال العمليـه جـارِ اضافـة** `{n}` **مـن الاعضـاء . .**"
+            )
         except TypeError:
             n -= 1
             continue
@@ -458,7 +487,9 @@ async def _(event):
     to_write_chat = await event.get_input_chat()
     chat = None
     if input_str:
-        mentions = f"𓆩 𝑺𝑶𝑼𝑹𝑪𝑬 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 𝑮𝑹𝑶𝑼𝑷 𝑫𝑨𝑻𝑨 𓆪\n** ⪼ المشرفـون في {input_str} :** \n"
+        mentions = (
+            f"𓆩 𝑺𝑶𝑼𝑹𝑪𝑬 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 𝑮𝑹𝑶𝑼𝑷 𝑫𝑨𝑻𝑨 𓆪\n** ⪼ المشرفـون في {input_str} :** \n"
+        )
         try:
             chat = await event.client.get_entity(input_str)
         except Exception as e:
@@ -509,7 +540,9 @@ async def get_users(show):
     mentions = "𓆩 𝑺𝑶𝑼𝑹𝑪𝑬 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 𝑮𝑹𝑶𝑼𝑷 𝑫𝑨𝑻𝑨 𓆪\n**⎉╎الأعضـاء فـي هـذه المجموعـة 𓎤:**\n\n"
     await reply_id(show)
     if input_str := show.pattern_match.group(1):
-        mentions = "𓆩 𝑺𝑶𝑼𝑹𝑪𝑬 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 𝑮𝑹𝑶𝑼𝑷 𝑫𝑨𝑻𝑨 𓆪\n**⎉╎الأعضاء في {} من المجموعات 𓎤:**\n".format(input_str)
+        mentions = "𓆩 𝑺𝑶𝑼𝑹𝑪𝑬 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 𝑮𝑹𝑶𝑼𝑷 𝑫𝑨𝑻𝑨 𓆪\n**⎉╎الأعضاء في {} من المجموعات 𓎤:**\n".format(
+            input_str
+        )
         try:
             chat = await show.client.get_entity(input_str)
         except Exception as e:
@@ -523,17 +556,13 @@ async def get_users(show):
                 if user.deleted:
                     mentions += f"\n**⎉╎الحسـابات المحذوفـة ⌦** `{user.id}`"
                 else:
-                    mentions += (
-                        f"\n[{user.first_name}](tg://user?id={user.id}) "
-                    )
+                    mentions += f"\n[{user.first_name}](tg://user?id={user.id}) "
         else:
             async for user in show.client.iter_participants(show.chat_id):
                 if user.deleted:
                     mentions += f"\n**⎉╎الحسـابات المحذوفـة ⌦** `{user.id}`"
                 else:
-                    mentions += (
-                        f"\n[{user.first_name}](tg://user?id={user.id}) "
-                    )
+                    mentions += f"\n[{user.first_name}](tg://user?id={user.id}) "
     except Exception as e:
         mentions += f" {str(e)}" + "\n"
     await edit_or_reply(zedevent, mentions)
@@ -640,7 +669,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
 
     # Same for msg_info.users
     creator_valid = bool(first_msg_valid and msg_info.users)
-    creator_id = msg_info.users[0].id if creator_valid else None
+    msg_info.users[0].id if creator_valid else None
     creator_firstname = (
         msg_info.users[0].first_name
         if creator_valid and msg_info.users[0].first_name is not None
@@ -766,7 +795,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
     if creator_username is not None:
         caption += f"<b>⎉╎المالـك :</b>   {creator_username}\n"
     elif creator_valid:
-        caption += ('<b>⎉╎المالـك :</b>  <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n')
+        caption += '<b>⎉╎المالـك :</b>  <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n'
     if created is not None:
         caption += f"<b>⎉╎تاريـخ الإنشـاء :</b>  \n <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
     else:
@@ -776,11 +805,15 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         chat_level = int((1 + sqrt(1 + 7 * exp_count / 14)) / 2)
         caption += f"<b>⎉╎الأعضـاء:</b>  <code>{chat_level}</code>\n"
     if messages_viewable is not None:
-        caption += f"<b>⎉╎الرسائـل التي يمڪن مشاهدتها:</b>  <code>{messages_viewable}</code>\n"
+        caption += (
+            f"<b>⎉╎الرسائـل التي يمڪن مشاهدتها:</b>  <code>{messages_viewable}</code>\n"
+        )
     if messages_sent:
         caption += f"<b>⎉╎الرسائـل المرسلـة :</b> <code>{messages_sent}</code>\n"
     elif messages_sent_alt:
-        caption += f"<b>⎉╎الرسـائل المرسلة: <code>{messages_sent_alt}</code> {warn_emoji}\n"
+        caption += (
+            f"<b>⎉╎الرسـائل المرسلة: <code>{messages_sent_alt}</code> {warn_emoji}\n"
+        )
     if members is not None:
         caption += f"<b>⎉╎الأعضـاء:</b>  <code>{members}</code>\n"
     if admins is not None:
@@ -800,7 +833,8 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         caption += f"<b>⎉╎الوضـع البطيئ:</b>  {slowmode}"
         if (
             hasattr(chat_obj_info, "slowmode_enabled")
-            and chat_obj_info.slowmode_enabled):
+            and chat_obj_info.slowmode_enabled
+        ):
             caption += f", <code>{slowmode_time}s</code>\n"
         else:
             caption += "\n"
@@ -809,8 +843,12 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         caption += f"<b>⎉╎المقيّـد:</b>  {restricted}"
         if chat_obj_info.restricted:
             caption += f">:</b>  {chat_obj_info.restriction_reason[0].platform}\n"
-            caption += f"> <b>⎉╎السـبب :</b>  {chat_obj_info.restriction_reason[0].reason}\n"
-            caption += f"> <b>⎉╎النّـص :</b>  {chat_obj_info.restriction_reason[0].text}\n\n"
+            caption += (
+                f"> <b>⎉╎السـبب :</b>  {chat_obj_info.restriction_reason[0].reason}\n"
+            )
+            caption += (
+                f"> <b>⎉╎النّـص :</b>  {chat_obj_info.restriction_reason[0].text}\n\n"
+            )
         else:
             caption += "\n"
     if hasattr(chat_obj_info, "scam") and chat_obj_info.scam:
@@ -840,7 +878,9 @@ async def _(event):  # sourcery no-metrics
     if input_str:
         chat = await event.get_chat()
         if not chat.admin_rights and not chat.creator:
-            await edit_or_reply(event, "**⎉╎عـذراً عـزيـزي .. انت لسـت مشرفـاً هنـا 🙇🏻**")
+            await edit_or_reply(
+                event, "**⎉╎عـذراً عـزيـزي .. انت لسـت مشرفـاً هنـا 🙇🏻**"
+            )
             return False
     p = 0
     b = 0
@@ -1002,21 +1042,32 @@ async def _(event):
                 p += 1
         await et.edit("⪼ {} **↫** {} **رفع الحظر عنهم**".format(event.chat_id, p))
 
+
 @zedub.zed_cmd(pattern=r"مسح المحظورين(.*)")
 async def _(event):
-    zedevent = await edit_or_reply(event, "**⎉╎ إلغاء حظر جميع الحسابات المحظورة في هذه المجموعة 🆘**")
+    zedevent = await edit_or_reply(
+        event, "**⎉╎ إلغاء حظر جميع الحسابات المحظورة في هذه المجموعة 🆘**"
+    )
     succ = 0
     total = 0
     flag = False
     chat = await event.get_chat()
-    async for i in event.client.iter_participants(event.chat_id, filter=ChannelParticipantsKicked, aggressive=True):
+    async for i in event.client.iter_participants(
+        event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
+    ):
         total += 1
         rights = ChatBannedRights(until_date=0, view_messages=False)
         try:
-            await event.client(functions.channels.EditBannedRequest(event.chat_id, i, rights))
+            await event.client(
+                functions.channels.EditBannedRequest(event.chat_id, i, rights)
+            )
         except FloodWaitError as e:
-            LOGS.warn(f"**⎉╎هناك ضغط كبير بالاستخدام يرجى الانتضار .. ‼️ بسبب  : {e.seconds} **")
-            await zedevent.edit(f"**⎉╎{readable_time(e.seconds)} مطلـوب المـعاودة مـرة اخـرى للـمسح 🔁 **")
+            LOGS.warn(
+                f"**⎉╎هناك ضغط كبير بالاستخدام يرجى الانتضار .. ‼️ بسبب  : {e.seconds} **"
+            )
+            await zedevent.edit(
+                f"**⎉╎{readable_time(e.seconds)} مطلـوب المـعاودة مـرة اخـرى للـمسح 🔁 **"
+            )
             await sleep(e.seconds + 5)
         except Exception as ex:
             await zedevent.edit(str(ex))
@@ -1028,10 +1079,15 @@ async def _(event):
                 await sleep(1)
             try:
                 if succ % 10 == 0:
-                    await zedevent.edit(f"**⎉╎جـارِ مسـح المحـظورين ⭕️  : \n {succ} الحسـابات الـتي غيـر محظـورة لحـد الان.**")
+                    await zedevent.edit(
+                        f"**⎉╎جـارِ مسـح المحـظورين ⭕️  : \n {succ} الحسـابات الـتي غيـر محظـورة لحـد الان.**"
+                    )
             except MessageNotModifiedError:
                 pass
-    await zedevent.edit(f"**⎉╎تـم مسـح المحـظورين مـن أصـل 🆘 :**{succ}/{total} \n اسـم المجـموعـة 📄 : {chat.title}")
+    await zedevent.edit(
+        f"**⎉╎تـم مسـح المحـظورين مـن أصـل 🆘 :**{succ}/{total} \n اسـم المجـموعـة 📄 : {chat.title}"
+    )
+
 
 @zedub.zed_cmd(pattern=r"المحذوفين ?([\s\S]*)")
 async def rm_deletedacc(show):
@@ -1081,6 +1137,7 @@ async def rm_deletedacc(show):
             \n*⎉╎المحادثـة ⌂** {show.chat.title}(`{show.chat_id}`)",
         )
 
+
 @zedub.zed_cmd(pattern="احصائياتي$")
 async def count(event):
     u = 0
@@ -1129,8 +1186,10 @@ async def zed(event):
             ExportChatInviteRequest(event.chat_id),
         )
     except ChatAdminRequiredError:
-        return await edit_delete(zedevent, "**⎉╎عـذراً عـزيـزي .. انت لسـت مشرفـاً هنـا 🙇🏻**", 5)
-    await zedevent.edit(f"**⎉╎رابـط الـمجموعـه ⎋:**\n\n⎌ [{chat.title}]({ZL.link}) ⎌")   
+        return await edit_delete(
+            zedevent, "**⎉╎عـذراً عـزيـزي .. انت لسـت مشرفـاً هنـا 🙇🏻**", 5
+        )
+    await zedevent.edit(f"**⎉╎رابـط الـمجموعـه ⎋:**\n\n⎌ [{chat.title}]({ZL.link}) ⎌")
 
 
 @zedub.zed_cmd(pattern="رسائلي$")
@@ -1145,13 +1204,20 @@ async def zed(event):
     k = await event.get_reply_message()
     if k:
         a = await bot.get_messages(event.chat_id, 0, from_user=k.sender_id)
-        return await edit_or_reply(event, f"**⎉╎لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**")
+        return await edit_or_reply(
+            event, f"**⎉╎لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**"
+        )
     zzm = event.pattern_match.group(1)
     if zzm:
         a = await bot.get_messages(event.chat_id, 0, from_user=zzm)
-        return await edit_or_reply(event, f"**⎉╎المستخـدم** {zzm} **لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**")
+        return await edit_or_reply(
+            event,
+            f"**⎉╎المستخـدم** {zzm} **لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**",
+        )
     else:
-        await edit_or_reply(event, f"**⎉╎بالـرد ع الشخص او بـ إضافة أيـدي او يـوزر الشخـص لـ الامـر**")
+        await edit_or_reply(
+            event, f"**⎉╎بالـرد ع الشخص او بـ إضافة أيـدي او يـوزر الشخـص لـ الامـر**"
+        )
 
 
 @zedub.zed_cmd(pattern="(الرسائل|رسائل) ?(.*)")
@@ -1159,13 +1225,20 @@ async def zed(event):
     k = await event.get_reply_message()
     if k:
         a = await bot.get_messages(event.chat_id, 0, from_user=k.sender_id)
-        return await edit_or_reply(event, f"**⎉╎لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**")
+        return await edit_or_reply(
+            event, f"**⎉╎لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**"
+        )
     zzm = event.pattern_match.group(1)
     if zzm:
         a = await bot.get_messages(event.chat_id, 0, from_user=zzm)
-        return await edit_or_reply(event, f"**⎉╎المستخـدم** {zzm} **لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**")
+        return await edit_or_reply(
+            event,
+            f"**⎉╎المستخـدم** {zzm} **لديـه هنـا ⇽**  `{a.total}`  **رسـالـه 📩**",
+        )
     else:
-        await edit_or_reply(event, f"**⎉╎بالـرد ع الشخص او بـ إضافة أيـدي او يـوزر الشخـص لـ الامـر**")
+        await edit_or_reply(
+            event, f"**⎉╎بالـرد ع الشخص او بـ إضافة أيـدي او يـوزر الشخـص لـ الامـر**"
+        )
 
 
 @zedub.zed_cmd(pattern="الحاظرهم$")

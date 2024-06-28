@@ -1,16 +1,17 @@
-import re
 import html
+import re
 
 from telethon.utils import get_display_name
 
-from . import zedub, BOTLOG_CHATID
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper import blacklist_sql as spl
 from ..sql_helper import warns_sql as sql
 from ..utils import is_admin
+from . import BOTLOG_CHATID, zedub
 
 logger = logging.getLogger(__name__)
+
 
 @zedub.zed_cmd(incoming=True, groups_only=True)
 async def on_new_message(event):
@@ -66,7 +67,8 @@ async def _(event):
         for trigger in to_unblacklist
     )
     await edit_or_reply(
-        event, f"**⎉╎تم حذف (** {successful} / {len(to_unblacklist)} **(**\n**⎉╎من قائمة الكلمـات الممنوعـه هنـا .. بنجـاح ✓**"
+        event,
+        f"**⎉╎تم حذف (** {successful} / {len(to_unblacklist)} **(**\n**⎉╎من قائمة الكلمـات الممنوعـه هنـا .. بنجـاح ✓**",
     )
 
 
@@ -99,9 +101,11 @@ async def _(event):
         OUT_STR = "**⎉╎لم يتم اضافة كلمـات ممنوعـة هنـا بعـد ؟!**"
     await edit_or_reply(event, OUT_STR)
 
+
 # ================================================================================================ #
 # =========================================التحذيرات================================================= #
 # ================================================================================================ #
+
 
 @zedub.zed_cmd(pattern="تحذير(?:\s|$)([\s\S]*)")
 async def _(event):
@@ -143,7 +147,9 @@ async def _(event):
         return await edit_delete(event, "**⎉╎بالـرد ع المستخـدم للحصول ع تحذيراتـه ☻**")
     result = sql.get_warns(reply_message.sender_id, event.chat_id)
     if not result or result[0] == 0:
-        return await edit_or_reply(event, "**⎉╎هـذا المستخـدم ليس لديه أي تحذيـرات! ツ**")
+        return await edit_or_reply(
+            event, "**⎉╎هـذا المستخـدم ليس لديه أي تحذيـرات! ツ**"
+        )
     num_warns, reasons = result
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     if not reasons:
@@ -158,7 +164,9 @@ async def _(event):
         num_warns, limit
     )
 
-    text = "**⎉╎المستخـدم لديه {}/{} تحذيـرات ، **\n**⎉╎للأسباب : ↶**".format(num_warns, limit)
+    text = "**⎉╎المستخـدم لديه {}/{} تحذيـرات ، **\n**⎉╎للأسباب : ↶**".format(
+        num_warns, limit
+    )
     text += "\r\n"
     text += reasons
     await event.edit(text)

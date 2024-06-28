@@ -4,27 +4,20 @@
 # This file is a part of < https://github.com/Zed-Thon/ZelZal/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/Zed-Thon/ZelZal/blob/master/LICENSE/>.
-#الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙏𝙝𝙤𝙣
-#الملـف متعـوب عليه تخمـط اذكر المصـدر
-#تخمـط بـدون مصـدر اهينـك
+# الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙏𝙝𝙤𝙣
+# الملـف متعـوب عليه تخمـط اذكر المصـدر
+# تخمـط بـدون مصـدر اهينـك
 
 import os
 import random
-from asyncio import sleep
 
-from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from telethon.utils import get_input_location
-
-from . import zedub
-from ..core.logger import logging
 
 from ..Config import Config
-from ..core.managers import edit_or_reply, edit_delete
-from ..helpers import reply_id
-from . import *
-from . import mention
+from ..core.logger import logging
+from ..core.managers import edit_or_reply
+from . import zedub
 
 plugin_category = "العروض"
 LOGS = logging.getLogger(__name__)
@@ -32,7 +25,7 @@ LOGS = logging.getLogger(__name__)
 FANAN = "<b> 𓆩 𝗦𝗢𝗨𝗥𝗖𝗘 𝙕𝞝𝘿 - 💞🤵💞 𓆪 </b>"
 VANAN = "<b>✾╎افيشش 🥺💘 </b>"
 sts_fanan = "https://telegra.ph/file/50caf0efa9a2453985364.jpg"
-sts_fanan2 = "https://telegra.ph/file/dda7dd09f7d697fe92ff6.jpg" 
+sts_fanan2 = "https://telegra.ph/file/dda7dd09f7d697fe92ff6.jpg"
 sts_fanan3 = "https://telegra.ph/file/007f130ef1028d15c3596.jpg"
 sts_fanan4 = "https://telegra.ph/file/593c7e83d4eb25f7b0e55.jpg"
 sts_fanan5 = "https://telegra.ph/file/48f567da3417c581446dc.jpg"
@@ -51,7 +44,7 @@ sts_fanan17 = "https://telegra.ph/file/8775bf7b8edde56243897.jpg"
 sts_fanan18 = "https://telegra.ph/file/b544499b6853568ce475f.jpg"
 zahff = "https://t.me/fasngon/287"
 gtg_fanan = "https://telegra.ph/file/1f79aad6235f08ea76166.jpg"
-gtg_fanan2 = "https://telegra.ph/file/e04b22171d7bb524e7f44.jpg" 
+gtg_fanan2 = "https://telegra.ph/file/e04b22171d7bb524e7f44.jpg"
 gtg_fanan3 = "https://telegra.ph/file/4502e1268a73117d9abac.jpg"
 gtg_fanan4 = "https://telegra.ph/file/5221a638913c64749760b.jpg"
 gtg_fanan5 = "https://telegra.ph/file/9c070eb80b621cbe0333c.jpg"
@@ -107,26 +100,26 @@ async def zfetch_info(replied_user, event):
     FullUser = (await event.client(GetFullUserRequest(replied_user.id))).full_user
     user_id = replied_user.id
     first_name = replied_user.first_name
-    last_name = replied_user.last_name
-    full_name = FullUser.private_forward_name
-    common_chat = FullUser.common_chats_count
-    username = replied_user.username
-    user_bio = FullUser.about
-    is_bot = replied_user.bot
-    restricted = replied_user.restricted
-    verified = replied_user.verified
+    replied_user.last_name
+    FullUser.private_forward_name
+    FullUser.common_chats_count
+    replied_user.username
+    FullUser.about
+    replied_user.bot
+    replied_user.restricted
+    replied_user.verified
     ZED_VOICE
     x = random.randrange(1, 2)
     if x == 1:
-       caption = f"<b>⪼• اطـلـع زاحـف 😹🤫</b>\n\n"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return zahff, caption
+        caption = f"<b>⪼• اطـلـع زاحـف 😹🤫</b>\n\n"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return zahff, caption
     if x == 2:
-       caption = f"<b>⪼• اطـلـع زاحـف 😹🤫</b>\n\n"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return zahff, caption
+        caption = f"<b>⪼• اطـلـع زاحـف 😹🤫</b>\n\n"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return zahff, caption
 
 
 async def fetch_info(replied_user, event):
@@ -134,142 +127,142 @@ async def fetch_info(replied_user, event):
     FullUser = (await event.client(GetFullUserRequest(replied_user.id))).full_user
     user_id = replied_user.id
     first_name = replied_user.first_name
-    last_name = replied_user.last_name
-    full_name = FullUser.private_forward_name
-    common_chat = FullUser.common_chats_count
-    username = replied_user.username
-    user_bio = FullUser.about
-    is_bot = replied_user.bot
-    restricted = replied_user.restricted
-    verified = replied_user.verified
+    replied_user.last_name
+    FullUser.private_forward_name
+    FullUser.common_chats_count
+    replied_user.username
+    FullUser.about
+    replied_user.bot
+    replied_user.restricted
+    replied_user.verified
     ZEED_IMG
     x = random.randrange(1, 18)
     if x == 1:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن إنجين أكيوريك 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن إنجين أكيوريك 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan, caption
     if x == 2:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن كيفانش تاتليتوغ 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan2, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن كيفانش تاتليتوغ 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan2, caption
     if x == 3:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن شاتاي أولسوي 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan3, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن شاتاي أولسوي 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan3, caption
     if x == 4:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن إنجين ألتان دوزياتان 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan4, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن إنجين ألتان دوزياتان 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan4, caption
     if x == 5:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن بوراك أوزجيفت 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan5, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن بوراك أوزجيفت 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan5, caption
     if x == 6:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن أراس بولوت إيناملي 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan6, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن أراس بولوت إيناملي 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan6, caption
     if x == 7:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن گريستيانو رونالدو 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan7, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن گريستيانو رونالدو 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan7, caption
     if x == 8:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن سيركان شاي أوغلو 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan8, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن سيركان شاي أوغلو 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan8, caption
     if x == 9:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن كرم بورسين🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan9, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن كرم بورسين🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan9, caption
     if x == 10:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن توم گــروز🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan10, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن توم گــروز🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan10, caption
     if x == 11:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن شاهـد گــابور🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan11, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن شاهـد گــابور🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan11, caption
     if x == 12:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن ليـو ميسـي🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan12, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن ليـو ميسـي🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan12, caption
     if x == 13:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن محمد حماقي🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan13, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن محمد حماقي🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan13, caption
     if x == 14:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن شَاروخــان🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan14, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن شَاروخــان🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan14, caption
     if x == 15:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن سيـف نبيل🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan15, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن سيـف نبيل🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan15, caption
     if x == 16:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن ليوناردو گـابريو 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan16, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن ليوناردو گـابريو 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan16, caption
     if x == 17:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن محمد رمـضان🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan17, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن محمد رمـضان🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan17, caption
     if x == 18:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن سعــد المجرد 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return sts_fanan18, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجج مِـن سعــد المجرد 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return sts_fanan18, caption
 
 
 async def ifetch_info(replied_user, event):
@@ -277,142 +270,142 @@ async def ifetch_info(replied_user, event):
     FullUser = (await event.client(GetFullUserRequest(replied_user.id))).full_user
     user_id = replied_user.id
     first_name = replied_user.first_name
-    last_name = replied_user.last_name
-    full_name = FullUser.private_forward_name
-    common_chat = FullUser.common_chats_count
-    username = replied_user.username
-    user_bio = FullUser.about
-    is_bot = replied_user.bot
-    restricted = replied_user.restricted
-    verified = replied_user.verified
+    replied_user.last_name
+    FullUser.private_forward_name
+    FullUser.common_chats_count
+    replied_user.username
+    FullUser.about
+    replied_user.bot
+    replied_user.restricted
+    replied_user.verified
     GZED_IMG
     x = random.randrange(1, 18)
     if x == 1:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن بيرين سات 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن بيرين سات 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan, caption
     if x == 2:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن إسـراء الاصيـل 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan2, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن إسـراء الاصيـل 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan2, caption
     if x == 3:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن رحمـة ريـاض 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan3, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن رحمـة ريـاض 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan3, caption
     if x == 4:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن تـوبا بويوكـوستن 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan4, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن تـوبا بويوكـوستن 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan4, caption
     if x == 5:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هـازال كـايا 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan5, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هـازال كـايا 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan5, caption
     if x == 6:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هـاندا ارتشـل 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan6, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هـاندا ارتشـل 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan6, caption
     if x == 7:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هيفـاء وهبـي 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan7, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هيفـاء وهبـي 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan7, caption
     if x == 8:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن نانسـي عجـرم 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan8, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن نانسـي عجـرم 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan8, caption
     if x == 9:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن شيـرين عبد الوهـاب 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan9, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن شيـرين عبد الوهـاب 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan9, caption
     if x == 10:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن احـلام 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan10, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن احـلام 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan10, caption
     if x == 11:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن حـلا تـرك 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan11, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن حـلا تـرك 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan11, caption
     if x == 12:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن نجـوى كـرم 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan12, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن نجـوى كـرم 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan12, caption
     if x == 13:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هـاندا ارتشـل 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan13, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن هـاندا ارتشـل 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan13, caption
     if x == 14:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن آيشـه افيخـاي 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan14, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن آيشـه افيخـاي 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan14, caption
     if x == 15:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن burcu ozberk 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan15, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن burcu ozberk 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan15, caption
     if x == 16:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن شيمـاء سيـف 😂💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan16, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن شيمـاء سيـف 😂💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan16, caption
     if x == 17:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن نيهـان اتاغـول 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan17, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن نيهـان اتاغـول 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan17, caption
     if x == 18:
-       caption = f"<b> {FANAN} </b>\n\n\n"
-       caption += f"<b> {VANAN} </b>"
-       caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-       caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن ميليسـا بامـوك 🥺💘. </b>"
-       caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
-       return gtg_fanan18, caption
+        caption = f"<b> {FANAN} </b>\n\n\n"
+        caption += f"<b> {VANAN} </b>"
+        caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+        caption += f"\n\n<b> ✾╎مبࢪوڪ زواجك مِـن ميليسـا بامـوك 🥺💘. </b>"
+        caption += f"\n\n<b> 𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 𓆪 </b> - @ZThon "
+        return gtg_fanan18, caption
 
 
 @zedub.zed_cmd(pattern="مشهور(?: |$)(.*)")
@@ -497,5 +490,3 @@ async def who(event):
         await zed.delete()
     except TypeError:
         await zed.edit(caption, parse_mode="html")
-
-

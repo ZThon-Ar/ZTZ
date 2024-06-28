@@ -15,22 +15,19 @@ Write file by Zelzal t.me/zzzzl1l
 import os
 import random
 import string
-try: # code by t.me/zzzzl1l
-    import arabic_reshaper
+
+try:  # code by t.me/zzzzl1l
+    pass
 except ModuleNotFoundError:
     os.system("pip3 install arabic_reshaper")
-    import arabic_reshaper
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument, InputMessagesFilterPhotos
-from telethon import events
-
-from . import zedub
 
 from ..core.logger import logging
-from ..core.managers import edit_delete, edit_or_reply as eor
-from ..helpers import reply_id, get_user_from_event
-from ..sql_helper.globals import addgvar, gvarstatus
+from ..core.managers import edit_or_reply as eor
+from ..sql_helper.globals import gvarstatus
 from . import *
+from . import zedub
 
 LOGS = logging.getLogger(__name__)
 PICS_STR = []
@@ -53,19 +50,17 @@ async def get_font_file(client, channel_id):
 async def lg1(userevent):
     event = await eor(userevent, "**- جـارِ صنـع لـوكـو انكـلش بحقـوقك ...**")
     me = await userevent.client.get_me()
-    my_first = me.first_name
+    me.first_name
     my_mention = f"[{me.first_name}](tg://user?id={me.id})"
-    if gvarstatus("ZED_FONTS") is None: # code by t.me/zzzzl1l
+    if gvarstatus("ZED_FONTS") is None:  # code by t.me/zzzzl1l
         zed_font = await get_font_file(userevent.client, "@T_Taiz")
     else:
         zed_font = gvarstatus("ZED_FONTS")
     if userevent.reply_to_msg_id:
         rply = await userevent.get_reply_message()
         logo_ = await rply.download_media()
-    else: # code by t.me/zzzzl1l
-        async for i in bot.iter_messages(
-            "@Z_44_Z", filter=InputMessagesFilterPhotos
-        ):
+    else:  # code by t.me/zzzzl1l
+        async for i in bot.iter_messages("@Z_44_Z", filter=InputMessagesFilterPhotos):
             PICS_STR.append(i)
         pic = random.choice(PICS_STR)
         logo_ = await pic.download_media()
@@ -76,8 +71,11 @@ async def lg1(userevent):
     arabic_text = "".join(
         char for char in text if char.isalpha() and char not in string.ascii_letters
     )
-    if arabic_text: # code by t.me/zzzzl1l
-        await eor(event, "**- الرجاء إدخال نص باللغـة الانجليـزية فقـط.**\n`.لوكو` + **نص انكـلش**\n`.لوقو` + **نص عـربـي**")
+    if arabic_text:  # code by t.me/zzzzl1l
+        await eor(
+            event,
+            "**- الرجاء إدخال نص باللغـة الانجليـزية فقـط.**\n`.لوكو` + **نص انكـلش**\n`.لوقو` + **نص عـربـي**",
+        )
         return
     if len(text) <= 8:
         font_size_ = 150
@@ -122,25 +120,22 @@ async def lg1(userevent):
         pass
 
 
-
 # code by t.me/zzzzl1l
 @zedub.zed_cmd(pattern=r"لوقو ?(.*)")
 async def lg1(userevent):
     event = await eor(userevent, "**- جـارِ صنـع لـوقـو عـربـي بحقـوقك ...**")
     me = await userevent.client.get_me()
-    my_first = me.first_name
+    me.first_name
     my_mention = f"[{me.first_name}](tg://user?id={me.id})"
-    if gvarstatus("ZED_FONTS") is None: # code by t.me/zzzzl1l
+    if gvarstatus("ZED_FONTS") is None:  # code by t.me/zzzzl1l
         zed_font = await get_font_file(userevent.client, "@S_SSQ")
-    else: # code by t.me/zzzzl1l
+    else:  # code by t.me/zzzzl1l
         zed_font = gvarstatus("ZED_FONTS")
     if userevent.reply_to_msg_id:
         rply = await userevent.get_reply_message()
         logo_ = await userevent.client.download_media(rply)
-    else: # code by t.me/zzzzl1l
-        async for i in bot.iter_messages(
-            "@Z_44_Z", filter=InputMessagesFilterPhotos
-        ):
+    else:  # code by t.me/zzzzl1l
+        async for i in bot.iter_messages("@Z_44_Z", filter=InputMessagesFilterPhotos):
             PICS_STR.append(i)
         pic = random.choice(PICS_STR)
         logo_ = await pic.download_media()
@@ -151,8 +146,11 @@ async def lg1(userevent):
     arabic_text = "".join(
         char for char in text if char.isalpha() and char not in string.ascii_letters
     )
-    if not arabic_text: # code by t.me/zzzzl1l
-        await eor(event, "**- الرجاء إدخال نص باللغـة العربيـة فقـط.**\n`.لوقو` + **نص عـربـي**\n`.لوكو` + **نص انكـلش**")
+    if not arabic_text:  # code by t.me/zzzzl1l
+        await eor(
+            event,
+            "**- الرجاء إدخال نص باللغـة العربيـة فقـط.**\n`.لوقو` + **نص عـربـي**\n`.لوكو` + **نص انكـلش**",
+        )
         return
     if len(text) <= 8:
         font_size_ = 150

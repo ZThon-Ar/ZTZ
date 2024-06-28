@@ -1,11 +1,10 @@
 import random
 import re
 import time
-import psutil
 from datetime import datetime
 from platform import python_version
 
-import requests
+import psutil
 from telethon import version
 from telethon.errors.rpcerrorlist import (
     MediaEmptyError,
@@ -14,14 +13,12 @@ from telethon.errors.rpcerrorlist import (
 )
 from telethon.events import CallbackQuery
 
-from . import StartTime, zedub, zedversion
-
 from ..Config import Config
 from ..core.managers import edit_or_reply
-from ..helpers.functions import zedalive, check_data_base_heal_th, get_readable_time
+from ..helpers.functions import check_data_base_heal_th, get_readable_time, zedalive
 from ..helpers.utils import reply_id
 from ..sql_helper.globals import gvarstatus
-from . import mention
+from . import StartTime, mention, zedub, zedversion
 
 plugin_category = "العروض"
 STATS = gvarstatus("Z_STATS") or "فحص"
@@ -45,7 +42,9 @@ async def amireallyalive(event):
     else:
         zedda = f"{bt.year}/{bt.month}/{bt.day}"
     Z_EMOJI = gvarstatus("ALIVE_EMOJI") or "✥┊"
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "** بـوت  زدثــون 𝗭𝗧𝗵𝗼𝗻  يعمـل .. بنجـاح ☑️ 𓆩 **"
+    ALIVE_TEXT = (
+        gvarstatus("ALIVE_TEXT") or "** بـوت  زدثــون 𝗭𝗧𝗵𝗼𝗻  يعمـل .. بنجـاح ☑️ 𓆩 **"
+    )
     ZED_IMG = gvarstatus("ALIVE_PIC")
     zed_caption = gvarstatus("ALIVE_TEMPLATE") or zed_temp
     caption = zed_caption.format(
