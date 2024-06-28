@@ -1,18 +1,26 @@
-import sys, asyncio
-import zelz
-from zelz import BOTLOG_CHATID, HEROKU_APP, PM_LOGGER_GROUP_ID
-from telethon import functions
+import sys
+
+from zelz import BOTLOG_CHATID, PM_LOGGER_GROUP_ID
+
 from .Config import Config
 from .core.logger import logging
 from .core.session import zedub
-from .utils import mybot, saves, autoname
-from .utils import add_bot_to_logger_group, load_plugins, setup_bot, startupmessage, verifyLoggerGroup
-from .sql_helper.globals import addgvar, delgvar, gvarstatus
+from .sql_helper.globals import gvarstatus
+from .utils import (
+    add_bot_to_logger_group,
+    autoname,
+    load_plugins,
+    mybot,
+    saves,
+    setup_bot,
+    startupmessage,
+    verifyLoggerGroup,
+)
 
 LOGS = logging.getLogger("Zelzal")
 cmdhr = Config.COMMAND_HAND_LER
 
-if gvarstatus("ALIVE_NAME") is None: #Code by T.me/zzzzl1l
+if gvarstatus("ALIVE_NAME") is None:  # Code by T.me/zzzzl1l
     try:
         LOGS.info("⌭ بـدء إضافة الاسـم التلقـائـي ⌭")
         zedub.loop.run_until_complete(autoname())
@@ -28,9 +36,12 @@ except Exception as e:
     LOGS.error(f"{str(e)}")
     sys.exit()
 
+
 class ZTCheck:
     def __init__(self):
         self.sucess = True
+
+
 ZTcheck = ZTCheck()
 
 try:
@@ -52,7 +63,9 @@ async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
     await load_plugins("assistant")
-    LOGS.info(f"⌔ تـم تنصيـب زدثــون . . بنجـاح ✓ \n⌔ لـ إظهـار الاوامـر ارسـل (.الاوامر)")
+    LOGS.info(
+        f"⌔ تـم تنصيـب زدثــون . . بنجـاح ✓ \n⌔ لـ إظهـار الاوامـر ارسـل (.الاوامر)"
+    )
     await verifyLoggerGroup()
     await add_bot_to_logger_group(BOTLOG_CHATID)
     if PM_LOGGER_GROUP_ID != -100:
