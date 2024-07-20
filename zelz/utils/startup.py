@@ -266,7 +266,7 @@ async def saves():
             LOGS.error("Getting Flood Error from telegram. Script is stopping now. Please try again after some time.")
             continue
         except Exception as e:
-            if "too many channels" str(e):
+            if "too many channels" in str(e):
                 print("- انت منضم في العديد من القنوات والمجموعات .. قم بالمغادرة من 10 او 15 قناة ثم قم بعمل إعادة تشغيل يدوي")
                 continue
             else:
