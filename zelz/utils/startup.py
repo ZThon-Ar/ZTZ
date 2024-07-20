@@ -413,11 +413,11 @@ async def verifyLoggerGroup():
             addgvar("PM_LOGGER_GROUP_ID", groupid)
             print("تم عمل المجموعة التخزين بنجاح واضافة الفارات اليه.")
             flag = True
-        if flag:
-            executable = sys.executable.replace(" ", "\\ ")
-            args = [executable, "-m", "zelz"]
-            os.execle(executable, *args, os.environ)
-            sys.exit(0)
+            if flag:
+                executable = sys.executable.replace(" ", "\\ ")
+                args = [executable, "-m", "zelz"]
+                os.execle(executable, *args, os.environ)
+                sys.exit(0)
         except Exception as e:
             if "can't create channels or chat" in str(e):
                 print("- حسابك محظور من شركة تيليجرام وغير قادر على إنشاء مجموعات السجل والتخزين")
