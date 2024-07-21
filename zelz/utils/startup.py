@@ -271,7 +271,7 @@ async def saves():
                 continue
             else:
                 continue
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
 
 
 async def load_plugins(folder, extfolder=None):
