@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 async def on_new_message(event):
     name = event.raw_text
     snips = spl.get_chat_blacklist(event.chat_id)
+    if not snips:
+        return
     zthonadmin = await is_admin(event.client, event.chat_id, event.client.uid)
     if not zthonadmin:
         return
