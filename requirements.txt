@@ -1,4 +1,4 @@
 Telethon
 googletrans==3.1.0a0
 ipaddress
-yt-dlp==2024.7.16
+git+https://github.com/yt-dlp/yt-dlp@master
